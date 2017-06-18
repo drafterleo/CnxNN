@@ -1,0 +1,145 @@
+En la nuna mondo, kiu chiam pli konscias rajtojn de malplimultoj kaj lingvan diversecon, akiras la internacia lingvo ree atenton de iuj gravuloj. Neregistaraj organizoj kaj asocioj insistas, ke la diskuto pri la internacia lingvo aperu kiel diskuttemo de la Unuighintaj Nacioj kaj Europa Unio. Julie 1996 Simpozio de internaciaj organizoj kunvenigis omaghe al Inazo Nitobe en Pragon grupon de sendependaj ekspertoj, kiuj esploris tiaman pozicion de Esperanto kaj proponis ghian envicigon en aktualaj interparoloj pri lingvaj rajtoj kaj politiko. La Manifesto de Prago (akceptita dum UK 1996 en Prago), moderna deklaro pri valoroj kaj celoj motivantaj Esperantan movadon, emfazas lingvan demokration kaj konservon de la lingva diverseco. Al famuloj uzantaj Esperanton nuntempe apartenas interalie la Nobel-premiito Reinhard Selten (1994), mondchampionoj en shakludo Judit Polgar kaj Tivadar Soros la patro de la financisto George Soros. Esperanto estis kiel komunikilo uzata ankau en la projekto Indighenaj Dialogoj, al kies celoj apartenis plifortigi intershanghon de spertoj inter indighenaj popoloj en la mondo, kiuj rifuzas uzon de iamaj koloniaj lingvoj.
+La kreinto de Esperanto, Ludoviko Lazaro Zamenhof, sciis, ke lingvo estas disvastigenda per kolektiva uzo, tial li limigis sian komencan proponon je minimuma gramatiko kaj malgranda vortprovizo. Hodiau tamen Esperanto estas plene disvastigita lingvo kun tutmonda komunumo de parolantoj kaj kompleta esprimaparato. Multaj ideoj de Zamenhof antauiris la ideojn de la fondinto de la moderna lingvistiko Ferdinand de Saussure, kies frato estis Esperantisto.
+
+Planlingvo estas konstruita lingvo kreita por uzo en homa komunikado. Tiel ghi distingighas de artaj lingvoj, eksperimentaj lingvoj kaj sekretaj lingvoj. En la komuna uzo la vorto "planlingvo" kelkfoje estas uzata por signifi chian ajn paroleblan konstruitan lingvon. Sed en la faka lingvajho, la vorto klare havas la pli limigitan difinon, ke nur temas pri lingvo kreita kun la celo de uzo en homa komunikado. Shajne ekde la antikvo, homoj intencas krei lingvon, kiel la greko Aleksarko.
+Multaj el tiuj lingvoj estas konstruitaj por uzo kiel internacia helplingvo, sed ankau estas fakaj planlingvoj kiel Marparolo, ne-internaciaj helplingvoj kiel Slovio kaj la malfacile klasigebla Tokipono, kiun oni ja internacie uzas por homa komunikado, sed kiu tute ne celas esti internacia helplingvo.
+Multaj esperantistoj dum varbado preferas la terminon planlingvo al artefarita lingvo, char chi tiu lasta estas plursenca (vidu natura lingvo). En multaj naturaj lingvoj la pli ofta ghenerala termino estas lauvorte ekvivalenta al la esperanta "konstruita lingvo" au "artefarita lingvo".
+Multaj ordinaraj normigitaj (skribaj) lingvoj estas diversgrade planitaj kaj planataj (precipe rilate al vortprovizo kaj ortografio). La terminon "planlingvo" oni tamen uzas ordinare (au precipe) nur, kiam la planado rezultigis tute novan lingvon. Se tia planlingvo estas kreita el materialo pruntita el aliaj lingvoj, oni ne rigardas, chu antaue, chu poste, tiujn fontolingvojn kiel dialektojn de la nove kreita lingvo. Ili ekzistas plu kiel tute apartaj kaj memstaraj lingvoj.
+Estas multaj tipoj de helplingvoj: esperantidoj, volapukidoj, kompromisplanlingvoj, zonaj planlingvoj ktp.
+Kelkajn planitajn lingvojn oni kutime ne nomas "planlingvon"; ili estas unuigoj de naciaj dialektoj por servi kiel nacia lingvo al landoj, kie ne estas nature precipa dialekto, ekzemple: nynorsk, la oficiala skriba formo de la Romancha, kaj la Indonezia.
+
+Kommunikado enhavas minimume kvar elementoj; sendanton, mesaghon, komunikadan kanalon kaj ricevanton. Tiaspeca modelo estas la plej simpla kiun oni povas fari. La modelo ne konsideras pri la kontekstojn, kiuj ampleksas ambau la sendanton kaj la ricevanton. Ghi ankau ne konsideras pri teknikaj variajhoj kiel distanco, lingvo, diversaj kulturaj elirpunktoj kaj teknikiloj. La sendanto-mesagho-ricevanto-modelo estas la elirpunkto por plejparte de nuntempaj komunikadaj modeloj.
+Du el la plej konataj modeloj estas la Lasswell-formulon kaj la Shannon-Weaver-modelon, kiuj ambau enhavas multajn similajhojn kun la sendanto-mesagho-ricevanto-modelo.
+Plej ofte oni konsideras kiel plej tipa formo de komunikado la lingva komunikado, sed vere estas multaj aliaj tipoj de komunikado, kiel per simboloj, signoj, gestoj, ktp.
+
+Komputilo estas aparato, kiu automate per programoj prilaboras datenojn lau instrukcioj.
+Plej vaste konataj estas persona komputilo (PK), tamen plej multekostaj kaj gravaj por progreso estas serviloj. Ekzistas ankau multaj specoj de specialaj komputiloj, ekz ludkonzolo, bankautomato.
+La historio de la komputilo komencighis per mekanikaj kalkulmashinoj en 1822. Charles Babbage ellaboris la Difference Engine kaj Analytical Engine (chefe por automate kalkuli kaj printi tabelojn de trigonometriajhoj uzotaj de maristoj por navigado) en la jaro 1833, sed pro financaj kauzoj ne povis konstrui ilin.
+Fakte multe pli antikva analoga komputilo estis trovita: la mehhanismo de Antikithera. Tio estas tre komplika aparato konstruita antau ch. 2000 jaroj, per kiu shipistoj povis kalkuli. Vidu pli sube.
+La komputilo en la nuna formo komencis sian evoluon ekde 1938. kiam Konrad Zuse konstruis sian unuan komputilon Z1. Nun oni distingas komputilojn en plej vasta senco je analoga komputilo kaj cifereca komputilo.
+Tradicie oni opinias, ke la plej grava parto de komputilo estas la aparataro (procesoro, printilo , komputilkorpo), tamen tiu vidpunkto estas tro unuflanka kaj ghenerale erara. Komputilo sen programo (au programaro) estas nenifaranta amaso de blatoj, icoj kaj aliaj elektrajhoj.
+Ech pli, hodiau eblas diri, ke ghuste la evoluo de la programaro estas lokomotivo movanta komputikon lau vojo de progreso. La plej brila ekzemplo estas la komputila ludo. Ghuste por la plej modernaj komputilaj ludoj estas projektataj kaj fabrikataj la plej modernaj hejmaj komputiloj (hejma komputilo) kaj ludkomputiloj. Plia gravega parto de komputilo estas flankaparataro. Ech eblas diri, ke nur danke al flankaparataro estas realigata plenvalora kunlaboro de homo kaj komputilo. Hodiau ne eblas imagi komputilon sen ekrano, klavaro, muso au stirstango. Ghuste danke al vasta flankaparataro kaj pripensita programaro sukcesis senrea invado de komputiloj en ordinaran vivon. Ne eblas supertaksi la rolon de komputiloj en diversaj formoj (ekz MP3 -muzikiloj au modernaj poshtelefonoj) . En la scienco aktive kreskas komputiko, kiu penetris en ordinarajn sciencojn ne nur aparate, sed ankau per ideoj kaj filozofio. Artoj, danke al komputilaj teknologioj (ekz elektronika muziko, komputila grafiko) kreskas kvazau eksplode. La nuna ekonomiko plene dependas de komputilaj teknologioj (ekz e-komerco, komputila analizo de vendado k.s.). Ech inter la plej potencaj firmaoj gravan parton okupas firmaoj ligitaj kun komputiloj (ekz Mikrosofto, Sun k.a.). Tamen la nuntempa komputilo ankorau ne estas la fino de la komputila evoluo kaj hodiau oni parolas pri biokomputilo, kvantuma komputilo kaj aliaj fantaziecaj au baldau realaj fenomenoj.
+
+Kvindekdujara dekor-pentristo Adolfo Lo Ritto jam kushis en la lito, kiam en la serurtruo turnighis shlosilo. Li rigardis la horloghon: kvarono post la unua nokte. Estas lia edzino Renata, kiu revenis hejmen.
+
+Devestante la elegantan chapon el birdaj plumetoj, shi haltis che la sojlo de la chambro; sur shia vizagho rigidighis trudite-senzorga rideto. La tuta aspekto de tiu tridekokjara malgrasa virineto kun svelta talio kaj chiam infaneske pautaj lipoj esprimis ion aroge senhontan.
+
+Sen levi la kapon de sur kuseno la edzo riproche, per febla vocho diris: ?Mi sanstatis malbonege?.
+
+?Chu malbone, vi diras??- indiferente demandis shi, alirante vestoshrankon.
+
+?Jes, doloratako de miaj teruraj kolikoj... mi supozis, ke jam ne eltenos...?
+
+?Sed nun jam malpli doloras, chu??- samtone demandis la edzino.
+
+?Nun malpli, sed tutegale ankorau doloras... ? Subite lia vocho shanghighis je akra kaj kolera: ? Sed vi kie forestis? Chu mi rajtas scii, kie vi estis? Jam duono antau la dua post noktomezo!?
+
+?Bonvolu ne kriachi tiel. Kie mi estis? En kinejo mi estis kun Francesca?.
+
+?En kiu kinejo??
+
+?En ?Maksimo??.
+
+?Kion oni demonstras??
+
+?Nu, sufichas! Kio al vi okazis hodiau? Enketadas policume, kie mi estis, en kiu kinejo, kiun filmon spektis, eble vi deziras scii en kiu tramo mi veturis? Mi ja diris al vi, ke mi estis kun Franca!?
+
+?Kiun, vi diras, filmon spektis?? Kun la sama mieno de martiro li movighis sur la lito por ebligi al si preni stakon da gazetoj de sur tablo.
+
+?Ahh, jen kio! Decidis kontroli min? Chu opinias, ke mi mensogas? Vi deziras kapti min je vorto, chu? Bone. En tiu okazo mi ghenerale nenion diru al vi. Jen tiel?.
+
+?Chu vi scias, kio vi estas? Chu deziras, mi diru al vi, kio vi estas? ? Pro kompato al si mem Lo Ritto preskau ploris. ? Chu deziras, mi diru, kio vi estas? Chu deziras?? ? Li sufokighadis pro furiozo, ripetante kaj ripetante la saman stultetan demandon.
+
+?Nu, diru, diru, se vi tion deziras!?
+
+?Vi... vi... vi...- automate elkriis la dekfoje, kun sadisma ghuo torturante la vundon, dolorantan ie en profundo de la brusto. ? Mi chi tie apenau savighis el morto, sed vi aventurachas ie amon kun diablo scias kiu. Iun ?Maksimo?-n elpensis! Mi malsanas, kaj shi amindumas al viroj... vi pli malpuras, ol la lasta stratulino... ? Por fortigi la impreson de la diritaj vortoj li shajnigis ploregon, kaj, singulte daurigis:- Vi... vi min... pere... vi min pereigis, hontigis mian familion... Mi enlite malsanas, sed vi tutan nokton ie am-promenas!?
+
+?Nu, komencis, komencis! ? reehhis fin-fine la edzino, kashinta dume la chapon kaj kostumon en shrankon, kaj turninta al li la palan kaj mistrajtan pro kolero vizaghon. ? Kaj nun, miaopinie, vi prefere silentighu?.
+
+?Jen kiel, estas mi, kiu devas silenti! Kiel vi trovis ja arogon por diri tion? Chu mi devas silenti? Chu mi shajnigu, ke nenio okazis? Chu vi promenachu amorkapte ghis la unua nokte, kaj mi ? silentu??
+
+Shi mallaute, kun emfazo, tiel, ke chiuj ?s? siblighis en shia prononco, diris: ?Se vi nur scius, kiel vi abomenas al mi, se vi nur scius, senila kapsiko! Oni imagu, pentristo Lo Ritto! Makululo! ? Shi ghuis, ke chiu shia vorto, kiel najlo pikas la plej sentemajn kaj doloremajn punktojn de lia animo.- Nu rigardu, rigardu al vi en la spegulon. Vi ja ne plu estas homo, ruinajho, sendenta monstro... kun viaj grasaj harligetoj! Pentristo, hha!.. Vi ja fetoras... Chu ne sentas, kia fetoro en la chambro?? Kaj shi kun grimaco de abomeno malfermis fenestron kaj kushigis la bruston sur fenestrobreton, shajnigante ke shi bezonas enspiri gluton da fresha aero.
+
+El la lito audighis jelpo: ?Mi sinmortigos, mi adiauos al la vivo, ne plu povas toleri...?
+
+La virino silentis, staranta senmove kaj rigardanta el la fenestro en malvarman decembran nokton.
+
+Post kelka tempo li, jam ne per kaprica, sed ree sonaranta pro furiozo vocho, kriis: ?Fermu do, fermu tiun malbenitan fenestron! Chu deziras, ke mi malsanighu??
+
+La edzino ne movighetis. Li oblikve rigardis shian vizaghon: ghi estis jem nek kolera, nek strecha; shajnis, ke el ghi subite foriris la vivo, la spegulighinta tie nova nekonata sento mirige shanghis ghin, tushitan de iu stranga lumo.
+
+?Interese, pri kio shi pensas nun? ? li demandis sin. ? Eble shin timigis mia minaco de sinmortigo?? Sed tuj li komprenis sian eraron. Ech se li havus iujn premisojn por dorloti la esperon, ke la edzino ankorau havas almenau guton da korligiteco al li, estis klare, ke nun la kauzo estas alia.
+
+Ia tre timiga kaj forta kauzo. Sed kiu konkrete?
+
+Subite la edzino, staranta same senmove, vokis lin: ?Adolfo!- shia vocho estis tenera kaj timoplena, kiel tiu de knabino, ? Adolfo, rigardu?, ? balbutis shi en neesprimebla sopiro, kvazau perdante la fortojn.
+
+La scivolo de Lo Ritto estis tiom granda, ke li, forgesinte pri malvarmo, saltis de sur la lito, apogis sin je la fenestrobreto apud la edzino kaj tiel... stuporighis.
+
+Super nigra kresto de tegmentoj che alia flanko de la korto lante levighis en la chielon io kolosa kaj lumanta. Rondeca, regulforma konturo pli kaj pli klare vidighis kaj fine aperis la tuta: estis brilanta disko de nekompareblaj dimensioj.
+
+?Dio kara, luno!? ? frapite flustris li.
+
+Jes, ghi estis luno, sed ne la pacema loghanto de nia nokta chielo, inspiranta amon, ne la hela feino, kiu per sia fabela lumo transformas kabanojn je palacoj, sed giganta, kavoplena monstro. Per fortoj de iu universa kataklismo ghi nemezureble grandighis kaj, silenta, pendighis super la mondo, vershante suben la kontinuan blindigan lumon, similan al tiu de festaj lud-fajroj. En tiu lumo chiu ajho videblighis ghis skrupulaj detaloj: anguloj, kornicoj, shtonoj, skrapoj sur muroj, haretoj kaj sulketoj sur vizaghoj de homoj ? chio vidighis klare kaj akre. Chies okuloj rigardis en la chielon, homoj ne povis elsorchi sin de tiu horora vidajho.
+
+Chu efektive la eternaj leghoj de naturo ne plu ekzistas, iu terura eraro perturbis la ordon en la universo? Eble, chi tio estas jam la fino, eble, nia satelito akcelighante kaj neeviteble proksimighas al tero kaj post kelkaj horoj la apokalipsa globo grandighos tiom, ke kovros la tuan chielon, poste ghia lumo estingighos en la konuso de tera ombro kaj jam ne plu estos videbla io ajn, kaj dum iu sekundero en febla lumo de la nokta urbo ni sentos, kiel al ni falas la senlima raspe shtona plafono; ni ne sukcesos ech rimarki ion ? chio frakasighos kaj falos en abismon de nenio antau ol nia audo perceptos la komencon de eksplodo.
+
+De la korto audighas klakoj de malfermataj fenestroj kaj shutroj, vokoj, krioj de hororo; apud fenestrobretoj arighis homoj, en tiu luna lumo ili shajnas fantomoj.
+
+Lo Ritto sentas, ke la mano de la edzino premas lian manon, premas tiel, ke li sentas doloron.
+
+?Adolfo, ? ghemas shi, ? Adolfo, ho, pardonu min, Adolfo, kompatu min, pardonu!?
+
+Shi singultas kaj premighas al li, shi forte febras. Ne fortirante la rigardon de la monstra luno, li brakumas la edzinon, kaj tiutempe ? kvazau iranta el la sino de tero tondra rumoro ? krias kaj ghemas homoj, milionoj da homoj ? shvebas super la tegmentoj de la dronanta en hororo urbo.
+
+En tombejo, super fresha argila tumulo staras nova kruco el kverko, fortika, peza, glata.
+
+Estas aprilo, la tagoj grizas, monumentoj de la vasta provinca tombejo elfore videblas tra nudigintaj arboj, kaj malvarma vento sencese tintigas porcelanan florkronon che la piedo de la kruco.
+
+Kaj sur la krucon mem estas enmuntita sufice granda konveksa porcelana medaliono, en la medaliono estas fotoportreto de junulino en gimnazia ago kun gojplenaj, mirinde viglaj okuloj.
+
+Shi estas Olja Mescerskaja.
+
+Kiel knabinon shin nenio distingis el amaso da brunaj gimnaziaj uniformoj: kion oni povus diri pri shi krom tio, ke shi apartenas al la gento de charmaj, richaj kaj felichaj knabinoj, ke shi havas bonajn lernokapablojn, sed estas petolema kaj tute neglektema rilate al la edifoj, kiujn provizas al shi la klasa mentorino? Poste komencighis shia mirinde rapida disfloro kaj maturigho. En la ago de dek kvar jaroj shi, krom minca talio kaj sveltaj kruroj, havis jam bone konturighintajn mamojn kaj chiujn chi formojn, kies fascinon gis nun ne kapablis esprimi la homaj vortoj; dekkvin-jara shi jam famis kiel belulino. Kiom zorge aranghis la harojn iuj el shiaj amikinoj, kiom puremaj ili estis, kiom kontrolis siajn diskretajn movojn! Sed shi timis nenion ? nek inkajn makulojn sur la fingroj, nek postkuran ekrughon sur la vizagho, nek tauzitan hararanghon, nek nudighintan pro kurfalo genuon. Sen iuj zorgoj kaj klopodoj shiaflanke, iel nepercepteble venis al shi chio, kio tiom diferencigis shin dum du shiaj lastaj jaroj el la tuta gimnazio ? gracio, eleganteco, lerto, hela brilo de la okuloj... Neniu tiel dancis dum baloj kiel Olja Meshcherskaja, neniu glitkuris kiel shi, neniu estis tiom amindumata kiel shi, kaj ial neniun tiom adoris malpliaghaj klasoj ol shin. Nepercepteble shi transformighis el infano al junulino, kaj nerimarkeble fortighis shia gimnazia famo, kaj jam startis rumoroj, ke shi estas frivola, ke shi ne povas vivi sen adorantoj, ke shin ghis frenezigho amas gimnaziano Senshin, ke kvazau ankau shi lin amas, sed shia favoro estas tiom variighema, ke li foje atencis sian vivon.
+
+En sia lasta vintro Olja Meshcherskaja tute folighis en vortico de gajo, kiel oni kutimis diri en la gimnazio. La vintro richis je negho, suna lumo, frosto, la suno frue descendis post la altan abiaron, nepre serena, lumradia, auguranta ankau por morgauo froston kaj sunan brilon, promenadon lau Sobornaja strato, glitkuradon en la urba ghardeno, rozkoloran vesperon, muzikon kaj la chiaman amason da homoj glitantan chiuflanken sur la skatejo, en kiu Olja Meshcherskaja shajnis esti la plej senzorga, la plej felicha. Kaj foje dum la granda pauzo inter lecionoj, kiam shi kvazau vento kuradis en la asemblea halo, postchasata de aro da beate krichantaj unuaklasaninoj, oni subite vokis shin al la gimnazia estrino. Shi abrupte haltis, nur foje profunde ekspiris, ordigis la harojn per rapida kaj jam kutima virineca gesto, tiris la angulojn de la antautuko shultren kaj kun radiantaj okuloj suprenkuris. La estrino ? junaspekta, sed grizhara ? trankvile sidis kun trikajho enmane che skribotablo sub portreto de la caro.
+
+? Bonan matenon, mademoiselle Meshcherskaja, ? shi diris france sen forturni la okulojn de la trikajho.- Bedaurinde, jam ne unuafoje mi estas devigita voki vin kaj paroli kun vi rilate de via konduto.
+
+? Jes, mi auskultas, madame, ? respondis Meshcherskaja, venante al la tablo, rigardante shin hele kaj vivece, tamen kun la vizagho senesprima, kaj shi riverencis tiom facile kaj gracie kiel nur shi sciis.
+
+? Auskultos vi min ne bone, bedaurinde, mi jam spertis tion,- diris la estrino kaj tirante la fadenon, kiu rotaciigis sur polurita planko la volvajhon, al kiu scivoleme rigardis Meshcherskaja, levis la okulojn. ? Mi ne ripetos chion denove, nek parolos longe,- diris shi.
+
+Al Meshcherskaja tre plachis tiu chi mirinde pura kaj granda kabineto, tiel bone spiranta dum frostaj tagoj per varmo de la brilanta forno kaj per fresho de konvaloj sur la skribotablo. Shi rigardis al la juna caro, pentrita plenstatura meze de iu brila salono, poste al rekta harlinio inter la blondaj, zorge frizitaj haroj de l' estrino, kaj atente silentis.
+
+? Vi ne plu estas knabino, ? dusence diris la estrino, kashe incitighante.
+
+? Jes, madame, ? simple, preskau gaje respondis Meshcherskaja.
+
+? Nek jam virino, ? ech pli emfaze diris la estrino, kaj shia pala vizagho iomete rughighis. ? Jen por komenci ? kion signifas via hararangho? Ghi estas tiu de matura virino.
+
+? Mi ne kulpas, madame, ke mi havas bonajn harojn,- respondis Meshcherskaja kaj tushetis per ambau manoj siajn bele aranghitajn harojn.
+
+? Ho, jen kio, vi do ne kulpas! ? diris la estrino. ? Vi ne kulpas pri la hararo, vi ne kulpas pri tiuj chi multekostaj kombiloj, vi ne kulpas pri tio, ke vi ruinigas viajn gepatrojn per achetigo de dudekrublaj shuetoj! Sed mi ripetas al vi, vi tute neglektas tion, ke vi dume estas nur gimnazianino...
+
+Kaj tiumomente Meshcherskaja sen perdi la simplecon kaj trankvilon, subite intervenis ghentile:
+
+? Mi pardonpetas, madame, sed vi eraras: mi estas virino. Kaj chu vi scias, kiu kulpas pri tio? Li estas amiko kaj najbaro de mia pachjo, kaj via frato ? Aleksej Mihhajlovich Malutin. Okazis tio pasintsomere en vilagho...
+
+Kaj monaton post tiu chi konversacio kozaka oficiro, hida kaj plebeska, neniel rilata al la socia rondo, al kiu apartenas Olja Meshcherskaja, pafmortigis shin sur fervojstacia kajo, meze de granda homamaso, jhus veninta el trajno. Kaj la nekredebla, konsterninta la estrinon, konfeso de Olja Meshcherskaja perfekte konfirmighis: la oficiro deklaris al la jughesploristo, ke Meshcherskaja tentis lin, intime rilatis kun li, jhuris edzinighi al li, sed che la stacidomo, en la tago de l' murdo, akompanante lin dum lia forveturo al Novocherkask, subite diris al li, ke shi neniam emis ami lin, ke chiuj paroloj pri la geedzigho estas nura shia chikano pri li, kaj shi donis al li por legi tiun paghon el la taglibro, kie temis pri Malutin.
+
+? Mi rigarde trakuris tiujn liniojn kaj sur la sama kajo, kie shi promenis, atendante kiam mi finos legi, pafis shin, ? diris la oficiro. ? La taglibro jen, vidu, kio estas skribita en ghi la dekan de julio de la pasinta jaro.
+
+En la taglibro estis skribita jeno:
+
+?Nun estas la dua horo postnoktmeze. Mi profunde ekdormis, sed tuj vekighis... Hodiau mi farighis virino! Pachjo, panjo kaj Anatolchjo, ili chiuj forveturis urben, kaj mi restis sola. Mi tiom felichis, ke mi estis sola! Matene mi promenis en ghardeno, en kamparo, vizitis arbaron, al mi shajnis, ke mi estas sola en la tuta mondo, kaj miaj pensoj estis tiom bonaj, kiom neniam antaue. Mi ankau tagmanghis sola, poste mi dum tuta horo pianludis, pro la muziko mi havis impreson, ke mi vivos eterne kaj pli feliche ol iu ajn. Poste mi ekdormis en la kabineto de pachjo, kaj je la kvara min vekis Katarinjo kaj diris, ke vizite venis Aleksej Mihhajlovich. Mi tre ghojis pri lia veno, estis al mi tre agrable akcepti lin. Li venis per para jungajho de siaj Vjatkaj chevaloj, tre belaj, kaj ili la tutan viziton staris che la portiko, li restis, char estis pluvo, kaj li esperis, ke ghis vespero la vojo sekighos. Li bedauris, ke ne trovis hejme pachjon, estis tre vigla kaj kondutis kun mi kvazau adoranto, multe shercis, ke delonge amas min. Kiam ni antau te-trinko promenis en ghardeno, le vetero denove ravis, la suno brilis tra la tuta malseka post pluvo ghardeno, kvankam farighis tute malvarme, kaj li tenis min subbrake kaj parolis, ke li estas Fausto kun Margareta. Li estas kvindekses-jara, sed ankorau tre bela kaj nepre bone vestita ? al mi ne plachis nur tio, ke li venis en pelerin-mantelo ? li odoras anglan odekolonon, kaj liaj okuloj estas tute junaj kaj nigraj, kaj la barbo estas elegante dividita je du longaj partoj kaj la tuta estas arghent-kolora. Dum te-trinko ni sidis sur la vintra verando, mi kvazau eksentis malsanon kaj ekkushis sur sofon, kaj li fumis, poste li sidighis apud min, denove komencis iun komplimentadon, poste komencis esplori kaj kisi mian manon. Mi shirmis la vizaghon per silka tuko, kaj li kelkfoje kisis min sur la lipojn tra la silko... Mi ne komprenas, kiel ghi povis okazi, mi frenezighis, mi neniam konjektis, ke mi estas tia! Nun por mi restas nur unu vojo... Mi sentas al li tiom fortan abomenon, ke ne povos travivi tion!...?
+
+La urbo dum tiuj chi aprilaj tagoj farighis pura kaj seka, pavimaj shtonoj blankighis, iri lau ili estis facile kaj agrable. Chiudimanche post la meso lau Sobornaja strato kondukanta eksterurben ekiras malgranda virino, funebre vestita, kun nigraj glacea-ledaj gantoj kaj ebon-fusta ombrelo. Shi trairas lau la shoseo malpuran placon, kie pluras fulgo-nigraj forghejoj, kaj freshe ventas kampara aero, plu inter klostro kaj prizono blankas chiel-deklivo kaj grizas printempa kampo, kaj poste, kiam oni trairas inter flakoj sub muro de la klostro kaj turnas sin maldekstren, oni vidas kvazau grandan malaltan ghardenon, chirkauitan de blanka muro, super kies pordego estas surskribo: Konsumpcio de l' Di-Patrino. La malgranda virino diskrete krucsignas sin kaj kutime iras lau la chefa aleo. Atinginte benkon, starantan kontrau la kverka kruco, shi sidas en vento kaj printempa malvarmo dum horo, dum du horoj, ghis kiam tute frostighas shiaj piedoj en legheraj shuoj kaj la mano en streta ganto. Auskultante printempajn birdojn, dolche kantantajn ankau en malvarmo, auskultante ventsonoron en la porcelana krono, shi pensas foje, ke fordonus duonon da sia vivo por ke nur ne estu antau shiaj okuloj tiu chi malviva florkrono. La krono, la tumulo, la kverka kruco! Chu estas eble, ke sub ghi trovighas la knabino, kies okuloj tiom senmorte radias el tiu konveksa porcelana medaliono sur la kruco, kaj kiel unuigi kun chi tiu pura rigardo la tutan hororon, asociitan nun kun la nomo de Olja Meshcherskaja? ? Sed en la fundo de sia animo la malgranda virino estas felicha, kiel chiuj homoj, senrezerve donantaj sin al iu revo.
+
+Tiu chi virino estas la klasa mentorino de Olja Meshcherskaja, maljuna fraulino, delonge vivanta per iu fantaziajho, substituanta por shi la realan vivon. La unua tia fantaziajho estis shia frato, malricha kaj neniel rimarkinda suboficiro ? shi ligis tutan sian animon kun li, kun lia estonto, kiu ial shajnis al shi brila. Kiam li estis mortigita en la batalo apud Mukdeno, shi provis konvinki sin, ke shi estas poridea laborulino. La morto de Olja Meshcherskaja kaptis shin por nova revo. Nun Olja Meshcherskaja ighis la objekto por shiaj senchesaj pensoj kaj sentoj. Shi vizitas la tombon en chiu festo, dum horoj kontemplas la kverkan krucon, rememoras la palan vizagheton de Olja Meshcherskaja en cherko, en chirkauo de floroj, kaj ankau tion, kion shi foje hazarde audis: foje dum granda pauzo inter lecionoj, promenante en la gimnazia ghardeno, Olja Meshcherskaja rapide, tre rapide parolis al sia intima amikino, korpulenta, altstatura Subotina:
+
+? Mi legis en unu libro de pachjo ? li havas multajn antikvajn, kuriozajn librojn ? kian belon devas havi la virino... Tie, vidu, tiom multe estas dirite, ke chion memori ne eblas: nu, memkompreneble, nigraj, kun koloro de bolanta pecho, okuloj ? je Dio, ghuste tiel estas skribite: de bolanta pecho! ? nigraj kiel nokto okulharoj, delikata tenera vangorugho, minca talio, la brakoj pli longaj ol ordinare ? chu vi sentas, pli longaj! ? malgrandaj piedoj, modere granda busto, bele rondaj tibikarnoj, konkokoloraj genuoj, oblikvaj shultroj ? mi multon preskau parkere ellernis, tiom chio chi estas vera! ? sed precipas, chu vi imagas kio? ? Facila spiro! Sed mi ja havas ghin, auskultu nur kiel mi suspiras, ? vere ja facile, chu?
+
+Nun tiu chi facila spiro denove dissolvighis en la mondo, en tiu chi nuba chielo, en tiu chi malvarma printempa vento.
+
+
