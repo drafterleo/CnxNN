@@ -6,10 +6,10 @@ class Notes:
                  note_count=100,
                  notation_count=10,
                  active_bits=8,
-                 bit_space=255):
+                 bit_count=255):
         self.note_count = note_count
         self.active_bits = active_bits
-        self.bit_space = bit_space
+        self.bit_count = bit_count
         self.notation_count = notation_count
         self._notes = list()  # [note_0_notations, note_1_notations ...]  -> [ [(idx idx ...) ...] ...]
         self.gen_notes()
@@ -25,7 +25,7 @@ class Notes:
         return len(self._notes)
 
     def notation_as_bits(self, notation) -> np.array:  # [1 0 1 0 0 ...]
-        bits = np.zeros(self.bit_space, dtype=np.uint8)
+        bits = np.zeros(self.bit_count, dtype=np.uint8)
         bits[list(notation)] = 1
         return bits
 
@@ -34,7 +34,7 @@ class Notes:
 
     def gen_notation(self) -> tuple:
         # just tuple of active bit indices
-        notation = np.random.choice(range(self.bit_space), self.active_bits, replace=False)
+        notation = np.random.choice(self.bit_count, self.active_bits, replace=False)
         notation.sort()
         return tuple(notation)
 
