@@ -23,10 +23,11 @@ class WatchPoint:
 
     def add_cluster(self, bit_key: tuple):
         if bit_key not in self.clusters:
-            self.clusters[bit_key] = Cluster
+            self.clusters[bit_key] = Cluster(bits=bit_key,
+                                             activate_threshold=self.cluster_activate_threshold)
 
     def update_clusters(self, active_bits: set):
-        for key, cluster in self.clusters:
+        for cluster in self.clusters.values():
             intersection = active_bits & cluster.bit_set
             if len(intersection) >= self.cluster_activate_threshold:
                 cluster.activate(intersection)

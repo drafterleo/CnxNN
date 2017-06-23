@@ -9,16 +9,16 @@ STATE_RECOGNIZE = 3
 
 class ContextNN:
     def __init__(self,
-                 input_bits_count: int,
-                 output_bits_count: int,
+                 input_bit_count: int,
+                 output_bit_count: int,
                  watch_point_count: int,
-                 watch_bits_count: int,
+                 watch_bit_count: int,
                  cluster_make_threshold: int,
                  cluster_activate_threshold: int):
-        self.input_bits_count = input_bits_count
-        self.output_bits_count = output_bits_count
+        self.input_bit_count = input_bit_count
+        self.output_bit_count = output_bit_count
         self.watch_point_count = watch_point_count
-        self.watch_bits_count = watch_bits_count
+        self.watch_bit_count = watch_bit_count
         self.cluster_make_threshold = cluster_make_threshold
         self.cluster_activate_threshold = cluster_activate_threshold
         self.state = STATE_LEARN
@@ -26,11 +26,11 @@ class ContextNN:
         self.gen_watch_points()
 
     def gen_watch_points(self):
-        for i in range(self.watch_bits_count):
-            watch_bits = np.random.choice(self.input_bits_count, self.watch_bits_count, replace=False)
+        for i in range(self.watch_point_count):
+            watch_bits = np.random.choice(self.input_bit_count, self.watch_bit_count, replace=False)
             watch_bits.sort()
             watch_bits_key = tuple(watch_bits)
-            output_bit = random.randrange(self.output_bits_count)
+            output_bit = random.randrange(self.output_bit_count)
             watch_point = WatchPoint(watch_bits=watch_bits_key,
                                      output_bit=output_bit,
                                      cluster_make_threshold=self.cluster_make_threshold,
@@ -38,7 +38,7 @@ class ContextNN:
             self.watch_points[watch_bits_key] = watch_point
 
     def receive_bits(self, input_bits: set, output_bits: set):
-        for key, watch_point in self.watch_points:
+        for watch_point in self.watch_points.values():
             if watch_point.output_bit in output_bits:
                 watch_point.process_input(input_bits)
 
