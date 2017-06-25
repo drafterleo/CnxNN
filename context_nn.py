@@ -3,6 +3,7 @@ import constants as const
 import numpy as np
 import random
 
+
 class ContextNN:
     def __init__(self,
                  input_bit_count: int,
@@ -21,6 +22,17 @@ class ContextNN:
         self.watch_points = dict()  # {(watch_bits): WatchPoint}
         self.gen_watch_points()
 
+    @property
+    def state(self):
+        return self._state
+
+    @state.setter
+    def state(self, value):
+        if self._state != value:
+            self._state = value
+            for point in self.watch_points.values():
+                point._state = value
+
     def gen_watch_points(self):
         for i in range(self.watch_point_count):
             watch_bits = np.random.choice(self.input_bit_count, self.watch_bit_count, replace=False)
@@ -37,4 +49,7 @@ class ContextNN:
         for watch_point in self.watch_points.values():
             if watch_point.output_bit in output_bits:
                 watch_point.process_input(input_bits)
+
+    def cluster_count(self) -> int:
+        return sum(wp.cluster_count() for wp in self.watch_points.values())
 

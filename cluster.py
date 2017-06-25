@@ -1,15 +1,12 @@
 from bitarray import bitarray
 import numpy as np
-from numpy import linalg
 
 
 class Cluster:
     def __init__(self,
                  bits: set,
-                 bit_mask: bitarray,
                  activate_threshold: int):
         self.bits = bits
-        self.bit_mask = bit_mask
         self.activate_threshold = activate_threshold
         self.stats = dict()
 
@@ -39,7 +36,7 @@ class Cluster:
         vectors = [[activity if bit in bit_key else 0 for bit in bit_map]
                    for bit_key, activity in self.stats.items()]
         vec_sum = np.sum(vectors, axis=0)
-        norm = np.max(vec_sum) # linalg.norm(vec_sum)
+        norm = np.max(vec_sum) # np.linalg.norm(vec_sum)
         return vec_sum / norm, bit_map
 
 
