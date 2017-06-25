@@ -1,25 +1,45 @@
 from bitarray import bitarray
+import numpy as np
+from numpy import linalg
 
 
 class Cluster:
     def __init__(self,
-                 bits: tuple,
+                 bits: set,
                  bit_mask: bitarray,
                  activate_threshold: int):
         self.bits = bits
-        self.bit_set = set(bits)
         self.bit_mask = bit_mask
         self.activate_threshold = activate_threshold
         self.stats = dict()
 
     def activate(self, bits: set):
-        key = tuple(sorted(bits))
-        self.stats[key] = self.stats.get(key, 0) + 1
+        bit_key = tuple(sorted(bits))
+        self.stats[bit_key] = self.stats.get(bit_key, 0) + 1
 
-    def stat_parts(self) -> dict:
-        parts = {}
+    def component_stats(self) -> dict:
+        components = {}
         total_activations = sum(self.stats.values())
-        for key, activations in self.stats.items():
-            parts[key] = activations / total_activations
-        return parts
+        if total_activations > 0:
+            for bit_key, activations in self.stats.items():
+                components[bit_key] = activations / total_activations  # probability (local frequency)
+        return components
+
+    def has_big_component(self, threshold: float, min_activations=10) -> bool:
+        if len(self.stats.keys()) < min_activations:
+            return False
+        components = self.component_stats()
+        for comp in components.values():
+            if comp >= threshold:
+                return True
+        return False
+
+    def bit_rate(self) -> (np.array, list):
+        bit_map = sorted(self.bits)
+        vectors = [[activity if bit in bit_key else 0 for bit in bit_map]
+                   for bit_key, activity in self.stats.items()]
+        vec_sum = np.sum(vectors, axis=0)
+        norm = np.max(vec_sum) # linalg.norm(vec_sum)
+        return vec_sum / norm, bit_map
+
 

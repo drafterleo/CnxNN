@@ -1,11 +1,7 @@
 from watch_point import WatchPoint
+import constants as const
 import numpy as np
 import random
-
-STATE_LEARN = 1
-STATE_CONSOLIDATE = 2
-STATE_RECOGNIZE = 3
-
 
 class ContextNN:
     def __init__(self,
@@ -21,7 +17,7 @@ class ContextNN:
         self.watch_bit_count = watch_bit_count
         self.cluster_make_threshold = cluster_make_threshold
         self.cluster_activate_threshold = cluster_activate_threshold
-        self.state = STATE_LEARN
+        self._state = const.STATE_LEARN
         self.watch_points = dict()  # {(watch_bits): WatchPoint}
         self.gen_watch_points()
 
