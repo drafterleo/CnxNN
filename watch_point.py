@@ -1,15 +1,20 @@
 import constants as const
+import utils
 from cluster import Cluster
+from bitarray import bitarray
 
 
 class WatchPoint:
     def __init__(self,
-                 watch_bits: tuple,  # input bit indices
+                 watch_bits: tuple,  # input bit indices (sorted)
+                 input_size: int,
                  output_bit: int,    # output bit index
                  cluster_make_threshold: int,
                  cluster_activate_threshold: int):
         self.watch_bits = watch_bits
         self.watch_bit_set = set(watch_bits)
+        self.input_size = input_size
+        self.bit_mask = utils.shape_bit_mask(input_size, watch_bits)
         self.output_bit = output_bit
         self.cluster_make_threshold = cluster_make_threshold
         self.cluster_activate_threshold = cluster_activate_threshold
@@ -18,28 +23,33 @@ class WatchPoint:
 
     def process_input(self, input_bits: set):
         active_bits = input_bits & self.watch_bit_set
+        bit_idx_map = [idx for idx, bit_idx in enumerate(self.watch_bits)
+                       if bit_idx in active_bits]
+        mapped_bit_mask = utils.shape_bit_mask(len(self.watch_bits), bit_idx_map)
         if len(active_bits) >= self.cluster_activate_threshold:
             if self._state == const.STATE_LEARN and len(active_bits) >= self.cluster_make_threshold:
-                self.add_cluster(active_bits)
+                self.add_cluster(active_bits, mapped_bit_mask)
             if self._state != const.STATE_RECOGNIZE:
-                self.update_clusters(active_bits)
+                self.update_clusters(active_bits, mapped_bit_mask)
 
-    def add_cluster(self, bits: set):
+    def add_cluster(self, bits: set, bit_mask: bitarray):
         is_subset = False
+        bit_mask_count = bit_mask.count()
         for cluster in self.clusters.values():
-            if bits.issubset(cluster.bits):
+            intersection = bit_mask & cluster.bit_mask
+            if intersection.count() == bit_mask_count:
                 is_subset = True
                 break
-        # is_subset = [True for cluster in self.clusters.values() if bits.issubset(cluster.bits)]
         if not is_subset:
-            bit_key = tuple(sorted(bits))
-            self.clusters[bit_key] = Cluster(bits=bits,
-                                             activate_threshold=self.cluster_activate_threshold)
+            key = bit_mask.to01() # tuple(sorted(bits))
+            self.clusters[key] = Cluster(bits=bits,
+                                         bit_mask=bit_mask,
+                                         activate_threshold=self.cluster_activate_threshold)
 
-    def update_clusters(self, bits: set):
+    def update_clusters(self, bits: set, bit_mask):
         for cluster in self.clusters.values():
-            intersection = bits & cluster.bits
-            if len(intersection) >= self.cluster_activate_threshold:
+            intersection = bit_mask & cluster.bit_mask
+            if intersection.count() >= self.cluster_activate_threshold:
                 cluster.activate(intersection)
 
     def cluster_count(self) -> int:

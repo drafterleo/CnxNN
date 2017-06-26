@@ -5,14 +5,16 @@ import numpy as np
 class Cluster:
     def __init__(self,
                  bits: set,
+                 bit_mask: bitarray,
                  activate_threshold: int):
         self.bits = bits
+        self.bit_mask = bit_mask
         self.activate_threshold = activate_threshold
         self.stats = dict()
 
-    def activate(self, bits: set):
-        bit_key = tuple(sorted(bits))
-        self.stats[bit_key] = self.stats.get(bit_key, 0) + 1
+    def activate(self, bit_mask: bitarray):
+        key = bit_mask.to01()  # tuple(sorted(bits))
+        self.stats[key] = self.stats.get(key, 0) + 1
 
     def component_stats(self) -> dict:
         components = {}

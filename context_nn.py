@@ -40,6 +40,7 @@ class ContextNN:
             watch_bits_key = tuple(watch_bits)
             output_bit = random.randrange(self.output_bit_count)
             watch_point = WatchPoint(watch_bits=watch_bits_key,
+                                     input_size=self.input_bit_count,
                                      output_bit=output_bit,
                                      cluster_make_threshold=self.cluster_make_threshold,
                                      cluster_activate_threshold=self.cluster_activate_threshold)
