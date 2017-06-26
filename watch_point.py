@@ -1,5 +1,6 @@
 import constants as const
 from cluster import Cluster
+import numpy as np
 
 
 class WatchPoint:
@@ -14,36 +15,42 @@ class WatchPoint:
         self.cluster_make_threshold = cluster_make_threshold
         self.cluster_activate_threshold = cluster_activate_threshold
         self._state = const.STATE_LEARN
+
         self.clusters = dict()
+        self.cluster_objects = []
+        self.cluster_masks = np.empty(shape=(0, len(watch_bits)), dtype=np.int8)
 
     def process_input(self, input_bits: set):
         active_bits = input_bits & self.watch_bit_set
         if len(active_bits) >= self.cluster_activate_threshold:
+            cluster_mask = np.array([1 if bit_idx in active_bits else 0
+                                     for bit_idx in self.watch_bits], dtype=np.int8)
+            bit_counts = np.count_nonzero(self.cluster_masks & cluster_mask, axis=1)
             if self._state == const.STATE_LEARN and len(active_bits) >= self.cluster_make_threshold:
-                self.add_cluster(active_bits)
+                self.add_cluster(active_bits, cluster_mask, bit_counts)
             if self._state != const.STATE_RECOGNIZE:
-                self.update_clusters(active_bits)
+                self.update_clusters(active_bits, cluster_mask, bit_counts)
 
-    def add_cluster(self, bits: set):
-        is_subset = False
-        for cluster in self.clusters.values():
-            if bits.issubset(cluster.bits):
-                is_subset = True
-                break
-        # is_subset = [True for cluster in self.clusters.values() if bits.issubset(cluster.bits)]
+    def add_cluster(self, bits: set, cluster_mask: np.array, bit_counts: np.array):
+        if len(bit_counts) > 0:
+            is_subset = np.count_nonzero(cluster_mask) == np.max(bit_counts)
+        else:
+            is_subset = False
         if not is_subset:
-            bit_key = tuple(sorted(bits))
-            self.clusters[bit_key] = Cluster(bits=bits,
-                                             activate_threshold=self.cluster_activate_threshold)
+            new_cluster = Cluster(bits=bits,
+                                  activate_threshold=self.cluster_activate_threshold)
+            self.cluster_objects.append(new_cluster)
+            self.cluster_masks = np.vstack((self.cluster_masks, cluster_mask))
 
-    def update_clusters(self, bits: set):
-        for cluster in self.clusters.values():
-            intersection = bits & cluster.bits
-            if len(intersection) >= self.cluster_activate_threshold:
-                cluster.activate(intersection)
+    def update_clusters(self, bits: set, cluster_mask: np.array, bit_counts: np.array):
+        if len(bit_counts) > 0:
+            active_clusters = np.where(bit_counts >= self.cluster_activate_threshold)
+            for idx in active_clusters[0]:
+                cluster = self.cluster_objects[idx]
+                cluster.activate(bits & cluster.bits)
 
     def cluster_count(self) -> int:
-        return len(self.clusters)
+        return len(self.cluster_objects)
 
 
 
