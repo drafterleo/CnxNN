@@ -23,16 +23,16 @@ class WatchPoint:
 
     def process_input(self, input_bits: set):
         active_bits = input_bits & self.watch_bit_set
-        bit_idx_map = [idx for idx, bit_idx in enumerate(self.watch_bits)
-                       if bit_idx in active_bits]
-        mapped_bit_mask = utils.shape_bit_mask(len(self.watch_bits), bit_idx_map)
+        bit_idx_map = [1 if bit_idx in active_bits else 0
+                       for idx, bit_idx in enumerate(self.watch_bits)]
+        mapped_bit_mask = bitarray(bit_idx_map) # utils.shape_bit_mask(len(self.watch_bits), bit_idx_map)
         if len(active_bits) >= self.cluster_activate_threshold:
             if self._state == const.STATE_LEARN and len(active_bits) >= self.cluster_make_threshold:
-                self.add_cluster(active_bits, mapped_bit_mask)
+                self.add_cluster(mapped_bit_mask)
             if self._state != const.STATE_RECOGNIZE:
-                self.update_clusters(active_bits, mapped_bit_mask)
+                self.update_clusters(mapped_bit_mask)
 
-    def add_cluster(self, bits: set, bit_mask: bitarray):
+    def add_cluster(self, bit_mask: bitarray):
         is_subset = False
         bit_mask_count = bit_mask.count()
         for cluster in self.clusters.values():
@@ -41,12 +41,11 @@ class WatchPoint:
                 is_subset = True
                 break
         if not is_subset:
-            key = bit_mask.to01() # tuple(sorted(bits))
-            self.clusters[key] = Cluster(bits=bits,
-                                         bit_mask=bit_mask,
+            key = bit_mask.tobytes() # tuple(sorted(bits))
+            self.clusters[key] = Cluster(bit_mask=bit_mask,
                                          activate_threshold=self.cluster_activate_threshold)
 
-    def update_clusters(self, bits: set, bit_mask):
+    def update_clusters(self, bit_mask):
         for cluster in self.clusters.values():
             intersection = bit_mask & cluster.bit_mask
             if intersection.count() >= self.cluster_activate_threshold:

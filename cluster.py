@@ -1,13 +1,12 @@
 from bitarray import bitarray
 import numpy as np
+import utils
 
 
 class Cluster:
     def __init__(self,
-                 bits: set,
                  bit_mask: bitarray,
                  activate_threshold: int):
-        self.bits = bits
         self.bit_mask = bit_mask
         self.activate_threshold = activate_threshold
         self.stats = dict()
@@ -34,7 +33,7 @@ class Cluster:
         return False
 
     def bit_rate(self) -> (np.array, list):
-        bit_map = sorted(self.bits)
+        bit_map = sorted(utils.extract_bit_indices(self.bit_mask))
         vectors = [[activity if bit in bit_key else 0 for bit in bit_map]
                    for bit_key, activity in self.stats.items()]
         vec_sum = np.sum(vectors, axis=0)
