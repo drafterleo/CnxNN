@@ -52,6 +52,20 @@ class WatchPoint:
     def cluster_count(self) -> int:
         return len(self.cluster_objects)
 
+    def remove_cluster(self, index: int):
+        del self.cluster_objects[index]
+        self.cluster_masks = np.delete(self.cluster_masks, (index,), axis=0)
+
+    def reduce_clusters(self, min_component = 0.1, min_activations=10):
+        for idx, cluster in enumerate(self.cluster_objects):
+            if not cluster.test_for_strength(component_threshold=min_component,
+                                             min_activations=min_activations,
+                                             trim=True,
+                                             remain_part=0.3,
+                                             clear_stats=True):
+                self.remove_cluster(idx)
+
+
 
 
 

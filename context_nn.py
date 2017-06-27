@@ -2,6 +2,7 @@ from watch_point import WatchPoint
 import constants as const
 import numpy as np
 import random
+from multiprocessing import Process
 
 
 class ContextNN:
@@ -49,7 +50,20 @@ class ContextNN:
         for watch_point in self.watch_points.values():
             if watch_point.output_bit in output_bits:
                 watch_point.process_input(input_bits)
+        # processes = []
+        # for watch_point in self.watch_points.values():
+        #     if watch_point.output_bit in output_bits:
+        #         p = Process(target=watch_point.process_input, args=(input_bits,))
+        #         processes.append(p)
+        # for p in processes:
+        #     p.start()
+        # for p in processes:
+        #     p.join()
 
     def cluster_count(self) -> int:
         return sum(wp.cluster_count() for wp in self.watch_points.values())
+
+    def reduce_clusters(self, min_component=0.1, min_activations=10):
+        for point in self.watch_points.values():
+            point.reduce_clusters(min_component, min_activations)
 

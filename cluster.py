@@ -8,6 +8,7 @@ class Cluster:
                  activate_threshold: int):
         self.bits = bits
         self.activate_threshold = activate_threshold
+        self.consolidated = 0
         self.stats = dict()
 
     def activate(self, bits: set):
@@ -38,5 +39,33 @@ class Cluster:
         vec_sum = np.sum(vectors, axis=0)
         norm = np.max(vec_sum) # np.linalg.norm(vec_sum)
         return vec_sum / norm, bit_map
+
+    def test_for_strength(self,
+                          component_threshold: float,
+                          min_activations: int,
+                          trim=False,
+                          remain_part=0.3,
+                          clear_stats=False) -> bool:
+        result = False
+        if self.stats and sum(self.stats.values()) >= min_activations:
+            # [0] - component bits, [1] - component part
+            components = sorted(self.component_stats().items(), key=lambda x: x[1], reverse=True)
+            for bits, part in components:
+                if part >= component_threshold:
+                    result = True
+                    break
+            if result:
+                if trim:
+                    component_sum = 0.0
+                    remain_bits = set()
+                    for bits, part in components:
+                        component_sum += part
+                        remain_bits |= set(bits)
+                        if component_sum > remain_part:
+                            break
+                    self.bits = remain_bits
+                if clear_stats:
+                    self.stats.clear()
+        return result
 
 
