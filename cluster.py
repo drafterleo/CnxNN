@@ -5,8 +5,11 @@ import numpy as np
 class Cluster:
     def __init__(self,
                  bits: set,
+                 bit_mask: np.array,
                  activate_threshold: int):
         self.bits = bits
+        self.bit_mask = bit_mask
+        self.bit_mask_size = bit_mask.size
         self.activate_threshold = activate_threshold
         self.consolidated = 0
         self.stats = dict()

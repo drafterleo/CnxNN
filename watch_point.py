@@ -7,10 +7,12 @@ class WatchPoint:
     def __init__(self,
                  watch_bits: tuple,  # input bit indices
                  output_bit: int,    # output bit index
+                 bit_mask: np.array,
                  cluster_make_threshold: int,
                  cluster_activate_threshold: int):
         self.watch_bits = watch_bits
         self.watch_bit_set = set(watch_bits)
+        self.bit_mask = bit_mask
         self.output_bit = output_bit
         self.cluster_make_threshold = cluster_make_threshold
         self.cluster_activate_threshold = cluster_activate_threshold
@@ -25,26 +27,27 @@ class WatchPoint:
         if len(active_bits) >= self.cluster_activate_threshold:
             cluster_mask = np.array([1 if bit_idx in active_bits else 0
                                      for bit_idx in self.watch_bits], dtype=np.int8)
-            clusterwise_bit_counts = np.count_nonzero(self.cluster_masks & cluster_mask, axis=1)
+            clusterwise_intersections = np.count_nonzero(self.cluster_masks & cluster_mask, axis=1)
             if self._state == const.STATE_LEARN and len(active_bits) >= self.cluster_make_threshold:
-                self.add_cluster(active_bits, cluster_mask, clusterwise_bit_counts)
+                self.add_cluster(active_bits, cluster_mask, clusterwise_intersections)
             if self._state != const.STATE_RECOGNIZE:
-                self.update_clusters(active_bits, clusterwise_bit_counts)
+                self.update_clusters(active_bits, clusterwise_intersections)
 
-    def add_cluster(self, bits: set, cluster_mask: np.array, clusterwise_bit_counts: np.array):
-        if len(clusterwise_bit_counts) > 0:
-            is_subset = np.count_nonzero(cluster_mask) == np.max(clusterwise_bit_counts)
+    def add_cluster(self, bits: set, cluster_mask: np.array, clusterwise_intersections: np.array):
+        if len(clusterwise_intersections) > 0:
+            is_subset = np.count_nonzero(cluster_mask) == np.max(clusterwise_intersections)
         else:
             is_subset = False
         if not is_subset:
             new_cluster = Cluster(bits=bits,
+                                  bit_mask=cluster_mask,
                                   activate_threshold=self.cluster_activate_threshold)
             self.cluster_objects.append(new_cluster)
             self.cluster_masks = np.vstack((self.cluster_masks, cluster_mask))
 
-    def update_clusters(self, bits: set, clusterwise_bit_counts: np.array):
-        if len(clusterwise_bit_counts) > 0:
-            active_clusters = np.where(clusterwise_bit_counts >= self.cluster_activate_threshold)
+    def update_clusters(self, bits: set, clusterwise_intersections: np.array):
+        if len(clusterwise_intersections) > 0:
+            active_clusters = np.where(clusterwise_intersections >= self.cluster_activate_threshold)
             for idx in active_clusters[0]:
                 cluster = self.cluster_objects[idx]
                 cluster.activate(bits & cluster.bits)
@@ -63,7 +66,15 @@ class WatchPoint:
                                              trim=True,
                                              remain_part=0.3,
                                              clear_stats=True):
-                self.remove_cluster(idx)
+                cluster.consolidated -= 1
+                if cluster.consolidated < 0:  # amnesty?
+                    self.remove_cluster(idx)
+            else:
+                new_bit_mask = np.array([1 if bit_idx in cluster.bits else 0
+                                         for bit_idx in self.watch_bits], dtype=np.int8)
+                cluster.bit_mask = new_bit_mask
+                self.cluster_masks[idx] = new_bit_mask  # if cluster was trimmed
+                cluster.consolidated += 1
 
 
 

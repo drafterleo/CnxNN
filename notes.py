@@ -24,7 +24,7 @@ class Notes:
     def __len__(self):
         return len(self._notes)
 
-    def notation_as_bits(self, notation) -> np.array:  # [1 0 1 0 0 ...]
+    def notation_as_bits(self, notation: set) -> np.array:  # [1 0 1 0 0 ...]
         bits = np.zeros(self.bit_count, dtype=np.uint8)
         bits[list(notation)] = 1
         return bits
@@ -68,3 +68,8 @@ class Notes:
         for note_idx, notation_idx in phrase:
             bits = bits.union(self._notes[note_idx][notation_idx])
         return bits
+
+    def phrase_chord_as_bits(self, phrase: list) -> np.array:
+        chord = self.phrase_chord(phrase)
+        return self.notation_as_bits(chord)
+
