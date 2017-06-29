@@ -73,7 +73,20 @@ class ContextNN:
     def cluster_count(self) -> int:
         return sum(wp.cluster_count() for wp in self.point_objects)
 
-    def reduce_clusters(self, min_component=0.1, min_activations=10):
+    def reduce_clusters(self,
+                        min_component=0.1,
+                        min_activations=10,
+                        trim=True,
+                        remain_part=0.3,
+                        clear_stats=True,
+                        consolidate=True,
+                        amnesty=True):
         for point in self.point_objects:
-            point.reduce_clusters(min_component, min_activations)
+            point.reduce_clusters(min_component=min_component,
+                                  min_activations=min_activations,
+                                  trim=trim,
+                                  remain_part=remain_part,
+                                  clear_stats=clear_stats,
+                                  consolidate=consolidate,
+                                  amnesty=amnesty)
 

@@ -49,7 +49,8 @@ class Cluster:
                           trim=False,
                           remain_part=0.3,
                           clear_stats=False,
-                          consolidate=False) -> bool:
+                          consolidate=False,
+                          amnesty=False) -> bool:
         # [0] - component bits, [1] - component part
         components = sorted(self.component_stats().items(), key=lambda x: x[1], reverse=True)
         result = False
@@ -63,8 +64,9 @@ class Cluster:
                 self.consolidated += 1
             else:
                 self.consolidated -= 1
-                if self.consolidated >= 0:
-                    result = True  # amnesty for previous consolidation
+                # amnesty for the previous consolidations
+                if amnesty and self.consolidated >= 0:
+                    result = True
         if result:
             if trim:
                 component_sum = 0.0

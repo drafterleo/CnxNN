@@ -59,28 +59,33 @@ class WatchPoint:
         del self.cluster_objects[index]
         self.cluster_masks = np.delete(self.cluster_masks, (index,), axis=0)
 
-    def reduce_clusters(self, min_component=0.1, min_activations=10):
+    def reduce_clusters(self,
+                        min_component=0.1,
+                        min_activations=10,
+                        trim=True,
+                        remain_part=0.3,
+                        clear_stats=True,
+                        consolidate=True,
+                        amnesty=True):
         remove_indices = []
         for idx, cluster in enumerate(self.cluster_objects):
-            print(cluster.stats)
             if not cluster.test_for_strength(component_threshold=min_component,
                                              min_activations=min_activations,
-                                             trim=True,
-                                             remain_part=0.3,
-                                             clear_stats=True,
-                                             consolidate=True):
+                                             trim=trim,
+                                             remain_part=remain_part,
+                                             clear_stats=clear_stats,
+                                             consolidate=consolidate,
+                                             amnesty=amnesty):
                 remove_indices.append(idx)
-                print(f'rm {idx}')
             else:
                 new_bit_mask = np.array([1 if bit_idx in cluster.bits else 0
                                          for bit_idx in self.watch_bits], dtype=np.int8)
                 cluster.bit_mask = new_bit_mask
                 self.cluster_masks[idx] = new_bit_mask  # if cluster was trimmed
-                print(f'stay alive {cluster.consolidated}')
 
-            for rm_idx in sorted(remove_indices, reverse=True):
-                del self.cluster_objects[rm_idx]
-            self.cluster_masks = np.delete(self.cluster_masks, remove_indices, axis=0)
+        for rm_idx in sorted(remove_indices, reverse=True):
+            del self.cluster_objects[rm_idx]
+        self.cluster_masks = np.delete(self.cluster_masks, remove_indices, axis=0)
 
 
 
