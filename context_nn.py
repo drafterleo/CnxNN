@@ -71,9 +71,9 @@ class ContextNN:
                 self.point_objects[idx].process_input(input_bits)
 
     def cluster_count(self) -> int:
-        return sum(wp.cluster_count() for wp in self.watch_points.values())
+        return sum(wp.cluster_count() for wp in self.point_objects)
 
     def reduce_clusters(self, min_component=0.1, min_activations=10):
-        for point in self.watch_points.values():
+        for point in self.point_objects:
             point.reduce_clusters(min_component, min_activations)
 

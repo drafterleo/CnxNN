@@ -48,27 +48,35 @@ class Cluster:
                           min_activations: int,
                           trim=False,
                           remain_part=0.3,
-                          clear_stats=False) -> bool:
+                          clear_stats=False,
+                          consolidate=False) -> bool:
+        # [0] - component bits, [1] - component part
+        components = sorted(self.component_stats().items(), key=lambda x: x[1], reverse=True)
         result = False
         if self.stats and sum(self.stats.values()) >= min_activations:
-            # [0] - component bits, [1] - component part
-            components = sorted(self.component_stats().items(), key=lambda x: x[1], reverse=True)
             for bits, part in components:
                 if part >= component_threshold:
                     result = True
                     break
+        if consolidate:
             if result:
-                if trim:
-                    component_sum = 0.0
-                    remain_bits = set()
-                    for bits, part in components:
-                        component_sum += part
-                        remain_bits |= set(bits)
-                        if component_sum > remain_part:
-                            break
-                    self.bits = remain_bits
-                if clear_stats:
-                    self.stats.clear()
+                self.consolidated += 1
+            else:
+                self.consolidated -= 1
+                if self.consolidated >= 0:
+                    result = True  # amnesty for previous consolidation
+        if result:
+            if trim:
+                component_sum = 0.0
+                remain_bits = set()
+                for bits, part in components:
+                    component_sum += part
+                    remain_bits |= set(bits)
+                    if component_sum > remain_part:
+                        break
+                self.bits = remain_bits
+        if clear_stats:
+            self.stats = dict()
         return result
 
 
