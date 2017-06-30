@@ -16,7 +16,7 @@ class WatchPoint:
         self.output_bit = output_bit
         self.cluster_make_threshold = cluster_make_threshold
         self.cluster_activate_threshold = cluster_activate_threshold
-        self._state = const.STATE_LEARN
+        self._state = const.STATE_ACCUMULATE
 
         # must have the synchronous indexation
         self.cluster_objects = []
@@ -28,9 +28,9 @@ class WatchPoint:
             cluster_mask = np.array([1 if bit_idx in active_bits else 0
                                      for bit_idx in self.watch_bits], dtype=np.int8)
             clusterwise_intersections = np.count_nonzero(self.cluster_masks & cluster_mask, axis=1)
-            if self._state == const.STATE_LEARN and len(active_bits) >= self.cluster_make_threshold:
+            if self._state == const.STATE_ACCUMULATE and len(active_bits) >= self.cluster_make_threshold:
                 self.add_cluster(active_bits, cluster_mask, clusterwise_intersections)
-            if self._state != const.STATE_RECOGNIZE:
+            if self._state != const.STATE_DETECT:
                 self.update_clusters(active_bits, clusterwise_intersections)
 
     def add_cluster(self, bits: set, cluster_mask: np.array, clusterwise_intersections: np.array):

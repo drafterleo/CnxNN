@@ -2,7 +2,6 @@ from watch_point import WatchPoint
 import constants as const
 import numpy as np
 import random
-from multiprocessing import Process
 
 
 class ContextNN:
@@ -19,7 +18,7 @@ class ContextNN:
         self.watch_bit_count = watch_bit_count
         self.cluster_make_threshold = cluster_make_threshold
         self.cluster_activate_threshold = cluster_activate_threshold
-        self._state = const.STATE_LEARN
+        self._state = const.STATE_ACCUMULATE
         self.watch_points = dict()  # {(watch_bits): WatchPoint}
 
         # must have the synchronous indexation (axis 0)
@@ -90,3 +89,43 @@ class ContextNN:
                                   consolidate=consolidate,
                                   amnesty=amnesty)
 
+    def point_stats(self) -> list:
+        """
+            [(output bit, cluster count), ...]
+        """
+        return [(wp.output_bit, wp.cluster_count())
+                for wp in self.point_objects]
+
+    def cluster_len_stats(self) -> dict:
+        """
+            {cluster len: cluster count, ...}
+        """
+        cluster_lens = dict()
+        for wp in self.point_objects:
+            for cluster in wp.cluster_objects:
+                cluster_lens[len(cluster.bits)] = cluster_lens.get(len(cluster.bits), 0) + 1
+        return cluster_lens
+
+    def cluster_activity_stats(self) -> dict:
+        """
+            {activity: cluster count, ...}
+        """
+        cluster_acts = dict()
+        for wp in self.point_objects:
+            for cluster in wp.cluster_objects:
+                key = sum(cluster.stats.values())
+                cluster_acts[key] = cluster_acts.get(key, 0) + 1
+        return cluster_acts
+
+    def cluster_consolidated_stats(self):
+        """
+            {consolidations: cluster count, ...}
+        """
+        stats = dict()
+        for wp in self.point_objects:
+            for cluster in wp.cluster_objects:
+                stats[cluster.consolidated] = stats.get(cluster.consolidated, 0) + 1
+        return stats
+
+    def cluster_max_component_stats(self):
+        pass
