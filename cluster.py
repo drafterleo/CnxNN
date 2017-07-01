@@ -2,7 +2,7 @@ from bitarray import bitarray
 import numpy as np
 
 
-class Cluster:
+class Cluster(object):
     def __init__(self,
                  bits: set,
                  bit_mask: np.array,
@@ -11,7 +11,7 @@ class Cluster:
         self.bit_mask = bit_mask
         self.bit_mask_size = bit_mask.size
         self.activate_threshold = activate_threshold
-        self.consolidated = 0
+        self.consolidations = 0
         self.stats = dict()
 
     def activate(self, bits: set):
@@ -61,11 +61,11 @@ class Cluster:
                     break
         if consolidate:
             if result:
-                self.consolidated += 1
+                self.consolidations += 1
             else:
-                self.consolidated -= 1
+                self.consolidations -= 1
                 # amnesty for the previous consolidations
-                if amnesty and self.consolidated >= 0:
+                if amnesty and self.consolidations >= 0:
                     result = True
         if result:
             if trim:
@@ -78,7 +78,12 @@ class Cluster:
                         break
                 self.bits = remain_bits
         if clear_stats:
-            self.stats = dict()
+            self.stats.clear()
         return result
+
+    def activity_numerator(self) -> int:
+        result = sum(acts * len(bits) for bits, acts in self.stats.items())
+        return result * self.consolidations
+
 
 

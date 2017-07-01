@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class Notes:
+class Notes(object):
     def __init__(self,
                  note_count=100,
                  notation_count=10,

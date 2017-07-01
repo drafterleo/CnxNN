@@ -3,7 +3,7 @@ from cluster import Cluster
 import numpy as np
 
 
-class WatchPoint:
+class WatchPoint(object):
     def __init__(self,
                  watch_bits: tuple,  # input bit indices
                  output_bit: int,    # output bit index
@@ -59,6 +59,20 @@ class WatchPoint:
         del self.cluster_objects[index]
         self.cluster_masks = np.delete(self.cluster_masks, (index,), axis=0)
 
+    def remove_clusters(self, indices: list):
+        for rm_idx in sorted(indices, reverse=True):
+            del self.cluster_objects[rm_idx]
+        self.cluster_masks = np.delete(self.cluster_masks, indices, axis=0)
+
+    def pack_subsets(self):
+        remove_indices = []
+        for idx, cluster in enumerate(self.cluster_objects):
+            intersections = np.count_nonzero(self.cluster_masks & cluster.bit_mask, axis=1)
+            supersets = np.where(intersections == len(cluster.bits))
+            if len(supersets) > 1:
+                remove_indices.append(idx)
+        self.remove_clusters(remove_indices)
+
     def reduce_clusters(self,
                         min_component=0.1,
                         min_activations=10,
@@ -83,9 +97,14 @@ class WatchPoint:
                 cluster.bit_mask = new_bit_mask
                 self.cluster_masks[idx] = new_bit_mask  # if cluster was trimmed
 
-        for rm_idx in sorted(remove_indices, reverse=True):
-            del self.cluster_objects[rm_idx]
-        self.cluster_masks = np.delete(self.cluster_masks, remove_indices, axis=0)
+        self.remove_clusters(remove_indices)
+
+    def output_vote(self, received_vectors: int) -> float:  # 0 or 1
+        max_cluster_len = max(len(cluster.bits) for cluster in self.cluster_objects)
+        max_cluster_consld = max(cluster.consolidations for cluster in self.cluster_objects)
+        activity_norm = received_vectors * self.cluster_count() * max_cluster_len * max_cluster_consld
+        cluster_contribs = sum(cluster.activity_numerator()/activity_norm for cluster in self.cluster_objects)
+        return cluster_contribs
 
 
 

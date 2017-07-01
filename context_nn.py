@@ -4,7 +4,7 @@ import numpy as np
 import random
 
 
-class ContextNN:
+class ContextNN(object):
     def __init__(self,
                  input_bit_count: int,
                  output_bit_count: int,
@@ -19,6 +19,7 @@ class ContextNN:
         self.cluster_make_threshold = cluster_make_threshold
         self.cluster_activate_threshold = cluster_activate_threshold
         self._state = const.STATE_ACCUMULATE
+        self.vectors_received = 0
         self.watch_points = dict()  # {(watch_bits): WatchPoint}
 
         # must have the synchronous indexation (axis 0)
@@ -59,6 +60,8 @@ class ContextNN:
             self.point_masks = np.vstack((self.point_masks, point_mask))
 
     def receive_bits(self, input_bits: set, output_bits: set):
+        self.vectors_received += 1
+
         # filter active points
         bit_mask = np.array([1 if bit_idx in input_bits else 0
                              for bit_idx in range(self.input_bit_count)], dtype=np.int8)
@@ -88,6 +91,32 @@ class ContextNN:
                                   clear_stats=clear_stats,
                                   consolidate=consolidate,
                                   amnesty=amnesty)
+            point.pack_subsets()
+
+    def start_detection(self):
+        self.state = const.STATE_DETECT
+        self.clear_cluster_activity()
+        self.vectors_received = 0
+
+    def detect_bits(self, input_bits: set):
+        self.vectors_received += 1
+        for point in self.point_objects:
+            point.process_input(input_bits)
+
+    def summarize_detection(self, point_threshold=0.5) -> list:  # output bits
+        result = [0] * self.output_bit_count
+        for output_bit in range(self.output_bit_count):
+            bit_points = [point for point in self.point_objects if point.output_bit == output_bit]
+            point_votes = [1 if point.output_vote(self.vectors_received) >= point_threshold else 0
+                           for point in bit_points]
+            if float(sum(point_votes)) > len(point_votes) / 2:
+                result[output_bit] = 1
+        return result
+
+    def clear_cluster_activity(self):
+        for point in self.point_objects:
+            for cluster in point.cluster_objects:
+                cluster.stats.clear()
 
     def point_stats(self) -> list:
         """
@@ -117,14 +146,14 @@ class ContextNN:
                 cluster_acts[key] = cluster_acts.get(key, 0) + 1
         return cluster_acts
 
-    def cluster_consolidated_stats(self):
+    def cluster_consolidated_stats(self) -> dict:
         """
             {consolidations: cluster count, ...}
         """
         stats = dict()
         for wp in self.point_objects:
             for cluster in wp.cluster_objects:
-                stats[cluster.consolidated] = stats.get(cluster.consolidated, 0) + 1
+                stats[cluster.consolidations] = stats.get(cluster.consolidations, 0) + 1
         return stats
 
     def cluster_max_component_stats(self):
