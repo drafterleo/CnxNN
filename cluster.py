@@ -82,8 +82,10 @@ class Cluster(object):
         return result
 
     def activity_numerator(self) -> int:
-        result = sum(acts * len(bits) for bits, acts in self.stats.items())
-        return result * self.consolidations
+        # result = sum(acts * len(bits) for bits, acts in self.stats.items())
+        # # print('point', [acts * len(bits) for bits, acts in self.stats.items()])
+        # return result * self.consolidations
+        return sum(self.stats.values())
 
 
 

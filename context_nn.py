@@ -1,4 +1,5 @@
 from watch_point import WatchPoint
+from bitnotes import BitNotes
 import constants as const
 import numpy as np
 import random
@@ -11,13 +12,17 @@ class ContextNN(object):
                  watch_point_count: int,
                  watch_bit_count: int,
                  cluster_make_threshold: int,
-                 cluster_activate_threshold: int):
+                 cluster_activate_threshold: int,
+                 bit_notes: BitNotes = None,
+                 data_marks: dict = None):
         self.input_bit_count = input_bit_count
         self.output_bit_count = output_bit_count
         self.watch_point_count = watch_point_count
         self.watch_bit_count = watch_bit_count
         self.cluster_make_threshold = cluster_make_threshold
         self.cluster_activate_threshold = cluster_activate_threshold
+        self.bit_notes = bit_notes
+        self.data_marks = data_marks
         self._state = const.STATE_ACCUMULATE
         self.vectors_received = 0
         self.watch_points = dict()  # {(watch_bits): WatchPoint}
@@ -43,11 +48,15 @@ class ContextNN(object):
         self.watch_points.clear()
         self.point_objects.clear()
         self.point_masks = np.empty(shape=(0, self.input_bit_count), dtype=np.int8)
+        output_bits = np.append(np.repeat(np.arange(self.output_bit_count),
+                                          self.watch_point_count // self.output_bit_count),
+                                np.arange(self.watch_point_count % self.output_bit_count))
+        np.random.shuffle(output_bits)
         for i in range(self.watch_point_count):
             watch_bits = np.random.choice(self.input_bit_count, self.watch_bit_count, replace=False)
             watch_bits.sort()
             watch_bits_key = tuple(watch_bits)
-            output_bit = random.randrange(self.output_bit_count)
+            output_bit = output_bits[i]
             point_mask = np.array([1 if bit_idx in watch_bits else 0
                                    for bit_idx in range(self.input_bit_count)], dtype=np.int8)
             watch_point = WatchPoint(watch_bits=watch_bits_key,
@@ -109,6 +118,8 @@ class ContextNN(object):
             bit_points = [point for point in self.point_objects if point.output_bit == output_bit]
             point_votes = [1 if point.output_vote(self.vectors_received) >= point_threshold else 0
                            for point in bit_points]
+            print([point.output_vote(self.vectors_received) for point in bit_points])
+            print(point_votes)
             if float(sum(point_votes)) > len(point_votes) / 2:
                 result[output_bit] = 1
         return result

@@ -30,8 +30,7 @@ class WatchPoint(object):
             clusterwise_intersections = np.count_nonzero(self.cluster_masks & cluster_mask, axis=1)
             if self._state == const.STATE_ACCUMULATE and len(active_bits) >= self.cluster_make_threshold:
                 self.add_cluster(active_bits, cluster_mask, clusterwise_intersections)
-            if self._state != const.STATE_DETECT:
-                self.update_clusters(active_bits, clusterwise_intersections)
+            self.update_clusters(active_bits, clusterwise_intersections)
 
     def add_cluster(self, bits: set, cluster_mask: np.array, clusterwise_intersections: np.array):
         if len(clusterwise_intersections) > 0:
@@ -102,8 +101,16 @@ class WatchPoint(object):
     def output_vote(self, received_vectors: int) -> float:  # 0 or 1
         max_cluster_len = max(len(cluster.bits) for cluster in self.cluster_objects)
         max_cluster_consld = max(cluster.consolidations for cluster in self.cluster_objects)
-        activity_norm = received_vectors * self.cluster_count() * max_cluster_len * max_cluster_consld
-        cluster_contribs = sum(cluster.activity_numerator()/activity_norm for cluster in self.cluster_objects)
+        activity_norm = received_vectors * self.cluster_count()  # * max_cluster_len * max_cluster_consld  * self.cluster_count()
+        if activity_norm:
+            cluster_contribs = sum(cluster.activity_numerator()
+                                   for cluster in self.cluster_objects
+                                   if cluster.consolidations == max_cluster_consld)
+            # print(list(cluster.activity_numerator() for cluster in self.cluster_objects))
+            # print(received_vectors, self.cluster_count(), max_cluster_len, max_cluster_consld)
+            # print(cluster_contribs)
+        else:
+            cluster_contribs = 0.0
         return cluster_contribs
 
 
