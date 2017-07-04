@@ -99,13 +99,12 @@ class WatchPoint(object):
         self.remove_clusters(remove_indices)
 
     def output_vote(self, received_vectors: int) -> float:  # 0 or 1
-        max_cluster_len = max(len(cluster.bits) for cluster in self.cluster_objects)
-        max_cluster_consld = max(cluster.consolidations for cluster in self.cluster_objects)
+        # max_cluster_len = max(len(cluster.bits) for cluster in self.cluster_objects)
+        # max_cluster_consld = max(cluster.consolidations for cluster in self.cluster_objects)
         activity_norm = received_vectors * self.cluster_count()  # * max_cluster_len * max_cluster_consld  * self.cluster_count()
         if activity_norm:
             cluster_contribs = sum(cluster.activity_numerator()
-                                   for cluster in self.cluster_objects
-                                   if cluster.consolidations == max_cluster_consld)
+                                   for cluster in self.cluster_objects)
             # print(list(cluster.activity_numerator() for cluster in self.cluster_objects))
             # print(received_vectors, self.cluster_count(), max_cluster_len, max_cluster_consld)
             # print(cluster_contribs)

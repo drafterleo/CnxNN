@@ -115,13 +115,12 @@ class ContextNN(object):
     def summarize_detection(self, point_threshold=0.5) -> list:  # output bits
         result = [0] * self.output_bit_count
         for output_bit in range(self.output_bit_count):
-            bit_points = [point for point in self.point_objects if point.output_bit == output_bit]
-            point_votes = [1 if point.output_vote(self.vectors_received) >= point_threshold else 0
-                           for point in bit_points]
-            print([point.output_vote(self.vectors_received) for point in bit_points])
-            print(point_votes)
-            if float(sum(point_votes)) > len(point_votes) / 2:
-                result[output_bit] = 1
+            bit_points = [point for point in self.point_objects
+                          if point.cluster_count() > 0 and point.output_bit == output_bit]
+            points_vote = sum([point.output_vote(self.vectors_received) / (point.cluster_count() * len(bit_points))
+                               for point in bit_points if point.cluster_count() > 0])
+            print(output_bit, points_vote)
+
         return result
 
     def clear_cluster_activity(self):

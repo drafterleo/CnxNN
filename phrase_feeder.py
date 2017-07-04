@@ -14,7 +14,7 @@ class PhraseFeeder:
         for key in phrase_base.keys():
             self.counters[key] = 0
 
-    def take_phrase_batch(self, count=100, random_bit_key=True) -> (list, tuple):
+    def take_phrase_batch(self, count=100, random_bit_key=False) -> (list, tuple):
         """
             return: phrases, bit_key
         """
