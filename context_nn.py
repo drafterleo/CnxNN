@@ -75,7 +75,7 @@ class ContextNN(object):
         bit_mask = np.array([1 if bit_idx in input_bits else 0
                              for bit_idx in range(self.input_bit_count)], dtype=np.int8)
         intersections = np.count_nonzero(self.point_masks & bit_mask, axis=1)
-        active_point_indices = np.where(intersections > 0)
+        active_point_indices = np.where(intersections > self.cluster_activate_threshold)
 
         for idx in active_point_indices[0]:
             if self.point_objects[idx].output_bit in output_bits:

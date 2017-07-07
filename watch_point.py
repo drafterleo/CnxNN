@@ -27,14 +27,14 @@ class WatchPoint(object):
         if len(active_bits) >= self.cluster_activate_threshold:
             cluster_mask = np.array([1 if bit_idx in active_bits else 0
                                      for bit_idx in self.watch_bits], dtype=np.int8)
-            clusterwise_intersections = np.count_nonzero(self.cluster_masks & cluster_mask, axis=1)
+            clusterwise_isects = np.count_nonzero(self.cluster_masks & cluster_mask, axis=1)
             if self._state == const.STATE_ACCUMULATE and len(active_bits) >= self.cluster_make_threshold:
-                self.add_cluster(active_bits, cluster_mask, clusterwise_intersections)
-            self.update_clusters(active_bits, clusterwise_intersections)
+                self.add_cluster(active_bits, cluster_mask, clusterwise_isects)
+            self.update_clusters(active_bits, clusterwise_isects)
 
-    def add_cluster(self, bits: set, cluster_mask: np.array, clusterwise_intersections: np.array):
-        if len(clusterwise_intersections) > 0:
-            is_subset = np.count_nonzero(cluster_mask) == np.max(clusterwise_intersections)
+    def add_cluster(self, bits: set, cluster_mask: np.array, clusterwise_isects: np.array):
+        if len(clusterwise_isects) > 0:
+            is_subset = np.count_nonzero(cluster_mask) == np.max(clusterwise_isects)
         else:
             is_subset = False
         if not is_subset:
@@ -44,9 +44,9 @@ class WatchPoint(object):
             self.cluster_objects.append(new_cluster)
             self.cluster_masks = np.vstack((self.cluster_masks, cluster_mask))
 
-    def update_clusters(self, bits: set, clusterwise_intersections: np.array):
-        if len(clusterwise_intersections) > 0:
-            active_clusters = np.where(clusterwise_intersections >= self.cluster_activate_threshold)
+    def update_clusters(self, bits: set, clusterwise_isects: np.array):
+        if len(clusterwise_isects) > 0:
+            active_clusters = np.where(clusterwise_isects >= self.cluster_activate_threshold)
             for idx in active_clusters[0]:
                 cluster = self.cluster_objects[idx]
                 cluster.activate(bits & cluster.bits)
