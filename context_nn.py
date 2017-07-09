@@ -2,7 +2,6 @@ from watch_point import WatchPoint
 from bitnotes import BitNotes
 import constants as const
 import numpy as np
-import random
 
 
 class ContextNN(object):
@@ -57,9 +56,9 @@ class ContextNN(object):
             watch_bits.sort()
             watch_bits_key = tuple(watch_bits)
             output_bit = output_bits[i]
-            point_mask = np.array([1 if bit_idx in watch_bits else 0
-                                   for bit_idx in range(self.input_bit_count)], dtype=np.int8)
-            watch_point = WatchPoint(watch_bits=watch_bits_key,
+            point_mask = np.zeros(self.input_bit_count, dtype=np.uint8)
+            point_mask[watch_bits] = 1
+            watch_point = WatchPoint(watch_bits=watch_bits,
                                      output_bit=output_bit,
                                      bit_mask=point_mask,
                                      cluster_make_threshold=self.cluster_make_threshold,
@@ -68,16 +67,16 @@ class ContextNN(object):
             self.point_objects.append(watch_point)
             self.point_masks = np.vstack((self.point_masks, point_mask))
 
-    def receive_bits(self, input_bits: set, output_bits: set):
+    def receive_bits(self, input_bits: np.array, output_bits: set):
         self.vectors_received += 1
 
         # filter active points
-        bit_mask = np.array([1 if bit_idx in input_bits else 0
-                             for bit_idx in range(self.input_bit_count)], dtype=np.int8)
-        intersections = np.count_nonzero(self.point_masks & bit_mask, axis=1)
-        active_point_indices = np.where(intersections > self.cluster_activate_threshold)
+        # bit_mask = np.array([1 if bit_idx in input_bits else 0
+        #                      for bit_idx in range(self.input_bit_count)], dtype=np.int8)
+        intersections = np.count_nonzero(self.point_masks & input_bits, axis=1)
+        active_point_indices = np.where(intersections > self.cluster_activate_threshold)[0]
 
-        for idx in active_point_indices[0]:
+        for idx in active_point_indices:
             if self.point_objects[idx].output_bit in output_bits:
                 self.point_objects[idx].process_input(input_bits)
 

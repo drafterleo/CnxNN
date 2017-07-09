@@ -1,21 +1,18 @@
-from bitarray import bitarray
 import numpy as np
 
 
 class Cluster(object):
     def __init__(self,
-                 bits: set,
                  bit_mask: np.array,
                  activate_threshold: int):
-        self.bits = bits
         self.bit_mask = bit_mask
         self.bit_mask_size = bit_mask.size
         self.activate_threshold = activate_threshold
         self.consolidations = 0
         self.stats = dict()
 
-    def activate(self, bits: set):
-        bit_key = tuple(sorted(bits))
+    def activate(self, bits: np.array):
+        bit_key = bits.tobytes()
         self.stats[bit_key] = self.stats.get(bit_key, 0) + 1
 
     def component_stats(self) -> dict:

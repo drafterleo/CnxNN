@@ -5,7 +5,9 @@ class PhraseFeeder:
     """
         phrase_base - {bit_key: [phrases(notated notes)]}
     """
-    def __init__(self, phrase_base: dict, marks: dict):
+    def __init__(self,
+                 phrase_base: dict,
+                 marks: dict):
         self.phrase_base = phrase_base
         self.marks = marks
         self.bit_keys = list(phrase_base.keys())
@@ -14,7 +16,9 @@ class PhraseFeeder:
         for key in phrase_base.keys():
             self.counters[key] = 0
 
-    def take_phrase_batch(self, count=100, random_bit_key=False) -> (list, tuple):
+    def take_phrase_batch(self,
+                          count=100,
+                          random_bit_key=False) -> (list, tuple):
         """
             return: phrases, bit_key
         """

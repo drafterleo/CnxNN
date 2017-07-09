@@ -20,36 +20,34 @@ class WatchPoint(object):
 
         # must have the synchronous indexation
         self.cluster_objects = []
-        self.cluster_masks = np.empty(shape=(0, len(watch_bits)), dtype=np.int8)
+        self.cluster_masks = np.empty(shape=(0, len(watch_bits)), dtype=np.uint8)
 
-    def process_input(self, input_bits: set):
-        active_bits = input_bits & self.watch_bit_set
-        if len(active_bits) >= self.cluster_activate_threshold:
-            cluster_mask = np.array([1 if bit_idx in active_bits else 0
-                                     for bit_idx in self.watch_bits], dtype=np.int8)
+    def process_input(self, input_bits: np.array):
+        cluster_mask = input_bits[self.watch_bits]
+        active_bit_count = np.count_nonzero(cluster_mask)
+        if active_bit_count >= self.cluster_activate_threshold:
             clusterwise_isects = np.count_nonzero(self.cluster_masks & cluster_mask, axis=1)
-            if self._state == const.STATE_ACCUMULATE and len(active_bits) >= self.cluster_make_threshold:
-                self.add_cluster(active_bits, cluster_mask, clusterwise_isects)
-            self.update_clusters(active_bits, clusterwise_isects)
+            if self._state == const.STATE_ACCUMULATE and \
+               active_bit_count >= self.cluster_make_threshold and \
+               (len(clusterwise_isects) == 0 or active_bit_count > np.max(clusterwise_isects)):
+                    self.add_cluster(cluster_mask)
+                    return
 
-    def add_cluster(self, bits: set, cluster_mask: np.array, clusterwise_isects: np.array):
-        if len(clusterwise_isects) > 0:
-            is_subset = np.count_nonzero(cluster_mask) == np.max(clusterwise_isects)
-        else:
-            is_subset = False
-        if not is_subset:
-            new_cluster = Cluster(bits=bits,
-                                  bit_mask=cluster_mask,
-                                  activate_threshold=self.cluster_activate_threshold)
-            self.cluster_objects.append(new_cluster)
-            self.cluster_masks = np.vstack((self.cluster_masks, cluster_mask))
+            if len(clusterwise_isects) > 0:
+                active_cluster_indices = np.where(clusterwise_isects >= self.cluster_activate_threshold)[0]
+                self.update_clusters(cluster_mask, active_cluster_indices)
 
-    def update_clusters(self, bits: set, clusterwise_isects: np.array):
-        if len(clusterwise_isects) > 0:
-            active_clusters = np.where(clusterwise_isects >= self.cluster_activate_threshold)
-            for idx in active_clusters[0]:
-                cluster = self.cluster_objects[idx]
-                cluster.activate(bits & cluster.bits)
+    def add_cluster(self, cluster_mask: np.array):
+        new_cluster = Cluster(bit_mask=cluster_mask,
+                              activate_threshold=self.cluster_activate_threshold)
+        self.cluster_objects.append(new_cluster)
+        self.cluster_masks = np.vstack((self.cluster_masks, cluster_mask))
+        new_cluster.activate(bits=cluster_mask)
+
+    def update_clusters(self, bits: np.array, active_cluster_indices: list):
+        for idx in active_cluster_indices:
+            cluster = self.cluster_objects[idx]
+            cluster.activate(bits & cluster.bit_mask)
 
     def cluster_count(self) -> int:
         return len(self.cluster_objects)
