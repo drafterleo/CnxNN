@@ -19,12 +19,13 @@ class Cluster(object):
         components = {}
         total_activations = sum(self.stats.values())
         if total_activations > 0:
-            for bit_key, activations in self.stats.items():
+            for str_key, activations in self.stats.items():
+                bit_key = tuple(np.fromstring(str_key, dtype=np.uint8))
                 components[bit_key] = activations / total_activations  # probability (local frequency)
         return components
 
     def has_big_component(self, threshold: float, min_activations=10) -> bool:
-        if len(self.stats.keys()) < min_activations:
+        if sum(self.stats.values()) < min_activations:
             return False
         components = self.component_stats()
         for comp in components.values():
