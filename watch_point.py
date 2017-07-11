@@ -65,7 +65,7 @@ class WatchPoint(object):
         remove_indices = []
         for idx, cluster in enumerate(self.cluster_objects):
             intersections = np.count_nonzero(self.cluster_masks & cluster.bit_mask, axis=1)
-            supersets = np.where(intersections == len(cluster.bits))
+            supersets = np.where(intersections == np.count_nonzero(cluster.bit_mask))
             if len(supersets) > 1:
                 remove_indices.append(idx)
         self.remove_clusters(remove_indices)
@@ -74,7 +74,7 @@ class WatchPoint(object):
                         min_component=0.1,
                         min_activations=10,
                         trim=True,
-                        remain_part=0.3,
+                        remain_parts=3,
                         clear_stats=True,
                         consolidate=True,
                         amnesty=True):
@@ -83,16 +83,13 @@ class WatchPoint(object):
             if not cluster.test_for_strength(component_threshold=min_component,
                                              min_activations=min_activations,
                                              trim=trim,
-                                             remain_part=remain_part,
+                                             remain_parts=remain_parts,
                                              clear_stats=clear_stats,
                                              consolidate=consolidate,
                                              amnesty=amnesty):
                 remove_indices.append(idx)
             else:
-                new_bit_mask = np.array([1 if bit_idx in cluster.bits else 0
-                                         for bit_idx in self.watch_bits], dtype=np.int8)
-                cluster.bit_mask = new_bit_mask
-                self.cluster_masks[idx] = new_bit_mask  # if cluster was trimmed
+                self.cluster_masks[idx] = cluster.bit_mask # if cluster was trimmed
 
         self.remove_clusters(remove_indices)
 

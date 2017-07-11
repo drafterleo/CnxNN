@@ -87,7 +87,7 @@ class ContextNN(object):
                         min_component=0.1,
                         min_activations=10,
                         trim=True,
-                        remain_part=0.3,
+                        remain_parts=3,
                         clear_stats=True,
                         consolidate=True,
                         amnesty=True):
@@ -95,7 +95,7 @@ class ContextNN(object):
             point.reduce_clusters(min_component=min_component,
                                   min_activations=min_activations,
                                   trim=trim,
-                                  remain_part=remain_part,
+                                  remain_parts=remain_parts,
                                   clear_stats=clear_stats,
                                   consolidate=consolidate,
                                   amnesty=amnesty)
@@ -141,7 +141,8 @@ class ContextNN(object):
         cluster_lens = dict()
         for wp in self.point_objects:
             for cluster in wp.cluster_objects:
-                cluster_lens[len(cluster.bits)] = cluster_lens.get(len(cluster.bits), 0) + 1
+                ones = np.sum(cluster.bit_mask)
+                cluster_lens[ones] = cluster_lens.get(ones, 0) + 1
         return cluster_lens
 
     def cluster_activity_stats(self) -> dict:

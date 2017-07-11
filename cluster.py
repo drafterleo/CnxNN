@@ -45,7 +45,7 @@ class Cluster(object):
                           component_threshold: float,
                           min_activations: int,
                           trim=False,
-                          remain_part=0.3,
+                          remain_parts=3,
                           clear_stats=False,
                           consolidate=False,
                           amnesty=False) -> bool:
@@ -67,20 +67,25 @@ class Cluster(object):
                     result = True
         if result:
             if trim:
-                component_sum = 0.0
-                remain_bits = set()
-                for bits, part in components:
-                    component_sum += part
-                    remain_bits |= set(bits)
-                    if component_sum > remain_part:
-                        break
-                self.bits = remain_bits
+                # OR(+) n nearest to most active combination vectors
+                base = np.array(components[0][0], dtype=np.uint8)
+                base_norm = base / np.linalg.norm(base)
+                vectors = np.array([bits for bits, _ in components[1:]])
+                norm = np.linalg.norm(vectors, axis=1)
+                vectors_norm = vectors / norm[:, None]
+                sim_idx = np.dot(vectors_norm, base_norm.T).argsort()[::-1]
+                remain_bits = base
+                if vectors.size >= remain_parts:
+                    for idx in sim_idx[:remain_parts]:
+                        remain_bits |= vectors[idx]
+                self.bit_mask = remain_bits
+
         if clear_stats:
             self.stats.clear()
         return result
 
     def activity_numerator(self) -> int:
-        result = sum(acts + len(bits) * 0.2 for bits, acts in self.stats.items())
+        result = sum(acts for bits, acts in self.stats.items())
         # # print('point', [acts * len(bits) for bits, acts in self.stats.items()])
         return result * self.consolidations
         # return sum(self.stats.values())
