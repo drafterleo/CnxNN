@@ -61,7 +61,22 @@ class WatchPoint(object):
             del self.cluster_objects[rm_idx]
         self.cluster_masks = np.delete(self.cluster_masks, indices, axis=0)
 
-    def pack_subsets(self):
+    def remove_duplicates(self):
+        unique_clusters = {}
+        for cluster in self.cluster_objects:
+            key = cluster.bit_mask.tobytes()
+            if key in unique_clusters:
+                unique_clusters[key].append(cluster)
+            else:
+                unique_clusters[key] = [cluster]
+
+        self.cluster_objects = []
+        self.cluster_masks = np.empty(shape=(0, len(self.watch_bits)), dtype=np.uint8)
+        for key, clusters in unique_clusters.items():
+            self.cluster_objects.append(clusters[0])
+            self.cluster_masks = np.vstack((self.cluster_masks, clusters[0].bit_mask))
+
+    def remove_subsets(self):
         remove_indices = []
         for idx, cluster in enumerate(self.cluster_objects):
             intersections = np.count_nonzero(self.cluster_masks & cluster.bit_mask, axis=1)
@@ -69,6 +84,10 @@ class WatchPoint(object):
             if len(supersets) > 1:
                 remove_indices.append(idx)
         self.remove_clusters(remove_indices)
+
+    def pack_subsets(self):
+        # self.remove_duplicates()
+        self.remove_subsets()
 
     def reduce_clusters(self,
                         min_component=0.1,
