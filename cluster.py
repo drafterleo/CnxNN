@@ -66,7 +66,7 @@ class Cluster(object):
                 if amnesty and self.consolidations >= 0:
                     result = True
         if result:
-            if trim:
+            if trim and len(components) > 1:
                 # OR(+) n nearest to most active combination vectors
                 base = np.array(components[0][0], dtype=np.uint8)
                 base_norm = base / np.linalg.norm(base)
@@ -75,9 +75,10 @@ class Cluster(object):
                 vectors_norm = vectors / norm[:, None]
                 sim_idx = np.dot(vectors_norm, base_norm.T).argsort()[::-1]
                 remain_bits = base
-                if vectors.size >= remain_parts:
-                    for idx in sim_idx[:remain_parts]:
-                        remain_bits |= vectors[idx]
+                if remain_parts > vectors.size:
+                    remain_parts = vectors.size
+                for idx in sim_idx[:remain_parts]:
+                    remain_bits |= vectors[idx]
                 self.bit_mask = remain_bits
 
         if clear_stats:
