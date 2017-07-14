@@ -111,7 +111,7 @@ class ContextNN(object):
         for point in self.point_objects:
             point.process_input(input_bits)
 
-    def summarize_detection(self, point_threshold=0.5) -> np.array:  # output bits
+    def summarize_detection(self) -> np.array:  # output bits
         result = [0] * self.output_bit_count
         for output_bit in range(self.output_bit_count):
             bit_points = [point for point in self.point_objects

@@ -117,7 +117,7 @@ class WatchPoint(object):
         # max_cluster_consld = max(cluster.consolidations for cluster in self.cluster_objects)
         activity_norm = received_vectors * self.cluster_count()  # * max_cluster_len * max_cluster_consld  * self.cluster_count()
         if activity_norm:
-            cluster_contribs = sum(cluster.activity_numerator()
+            cluster_contribs = sum(cluster.activity_numerator() * cluster.consolidations
                                    for cluster in self.cluster_objects)
             # print(list(cluster.activity_numerator() for cluster in self.cluster_objects))
             # print(received_vectors, self.cluster_count(), max_cluster_len, max_cluster_consld)
