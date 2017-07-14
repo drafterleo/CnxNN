@@ -24,9 +24,9 @@ class WatchPoint(object):
 
     def process_input(self, input_bits: np.array):
         cluster_mask = input_bits[self.watch_bits]
-        active_bit_count = np.count_nonzero(cluster_mask)
+        active_bit_count = np.sum(cluster_mask)
         if active_bit_count >= self.cluster_activate_threshold:
-            clusterwise_isects = np.count_nonzero(self.cluster_masks & cluster_mask, axis=1)
+            clusterwise_isects = np.sum(self.cluster_masks & cluster_mask, axis=1)
             if self._state == const.STATE_ACCUMULATE and \
                active_bit_count >= self.cluster_make_threshold and \
                (len(clusterwise_isects) == 0 or active_bit_count > np.max(clusterwise_isects)):
