@@ -40,7 +40,7 @@ class ContextNN(object):
     def state(self, value):
         if self._state != value:
             self._state = value
-            for point in self.watch_points.values():
+            for point in self.point_objects:
                 point._state = value
 
     def gen_watch_points(self):
@@ -53,8 +53,7 @@ class ContextNN(object):
         np.random.shuffle(output_bits)
         for i in range(self.watch_point_count):
             watch_bits = np.random.choice(self.input_bit_count, self.watch_bit_count, replace=False)
-            watch_bits.sort()
-            watch_bits_key = tuple(watch_bits)
+            # watch_bits.sort()
             output_bit = output_bits[i]
             point_mask = np.zeros(self.input_bit_count, dtype=np.uint8)
             point_mask[watch_bits] = 1
@@ -63,7 +62,6 @@ class ContextNN(object):
                                      bit_mask=point_mask,
                                      cluster_make_threshold=self.cluster_make_threshold,
                                      cluster_activate_threshold=self.cluster_activate_threshold)
-            self.watch_points[watch_bits_key] = watch_point
             self.point_objects.append(watch_point)
             self.point_masks = np.vstack((self.point_masks, point_mask))
 
