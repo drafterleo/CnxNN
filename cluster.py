@@ -11,9 +11,13 @@ class Cluster(object):
         self.consolidations = 0
         self.stats = dict()
 
-    def activate(self, bits: np.array):
+    def activate(self, bits: np.array, weight: int):
         bit_key = bits.tobytes()
-        self.stats[bit_key] = self.stats.get(bit_key, 0) + 1
+        acts = self.stats.get(bit_key, 0) + weight
+        if acts > 0:
+            self.stats[bit_key] = acts
+        else:
+            self.stats[bit_key] = 0
 
     def component_stats(self) -> dict:
         components = {}
@@ -32,14 +36,6 @@ class Cluster(object):
             if comp >= threshold:
                 return True
         return False
-
-    def bit_rate(self) -> (np.array, list):
-        bit_map = sorted(self.bits)
-        vectors = [[activity if bit in bit_key else 0 for bit in bit_map]
-                   for bit_key, activity in self.stats.items()]
-        vec_sum = np.sum(vectors, axis=0)
-        norm = np.max(vec_sum) # np.linalg.norm(vec_sum)
-        return vec_sum / norm, bit_map
 
     def test_for_strength(self,
                           component_threshold: float,
@@ -67,7 +63,7 @@ class Cluster(object):
                     result = True
         if result:
             if trim and len(components) > 1:
-                # OR(+) n nearest to most active combination vectors
+                # OR(+) n nearest to most active combination
                 base = np.array(components[0][0], dtype=np.uint8)
                 base_norm = base / np.linalg.norm(base)
                 vectors = np.array([bits for bits, _ in components[1:]])

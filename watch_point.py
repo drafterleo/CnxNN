@@ -1,6 +1,7 @@
 import constants as const
 from cluster import Cluster
 import numpy as np
+from numba import jit
 
 
 class WatchPoint(object):
@@ -22,7 +23,8 @@ class WatchPoint(object):
         self.cluster_objects = []
         self.cluster_masks = np.empty(shape=(0, len(watch_bits)), dtype=np.uint8)
 
-    def process_input(self, input_bits: np.array):
+    # @jit
+    def process_input(self, input_bits: np.array, weight: int):
         cluster_mask = input_bits[self.watch_bits]
         active_bit_count = np.sum(cluster_mask)
         if active_bit_count >= self.cluster_activate_threshold:
@@ -35,19 +37,19 @@ class WatchPoint(object):
 
             if len(clusterwise_isects) > 0:
                 active_cluster_indices = np.where(clusterwise_isects >= self.cluster_activate_threshold)[0]
-                self.update_clusters(cluster_mask, active_cluster_indices)
+                self.update_clusters(cluster_mask, active_cluster_indices, weight)
 
     def add_cluster(self, cluster_mask: np.array):
         new_cluster = Cluster(bit_mask=cluster_mask,
                               activate_threshold=self.cluster_activate_threshold)
         self.cluster_objects.append(new_cluster)
         self.cluster_masks = np.vstack((self.cluster_masks, cluster_mask))
-        new_cluster.activate(bits=cluster_mask)
+        new_cluster.activate(bits=cluster_mask, weight=+1)
 
-    def update_clusters(self, bits: np.array, active_cluster_indices: list):
+    def update_clusters(self, bits: np.array, active_cluster_indices: list, weight):
         for idx in active_cluster_indices:
             cluster = self.cluster_objects[idx]
-            cluster.activate(bits & cluster.bit_mask)
+            cluster.activate(bits & cluster.bit_mask, weight)
 
     def cluster_count(self) -> int:
         return len(self.cluster_objects)

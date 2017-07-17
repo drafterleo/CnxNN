@@ -69,14 +69,14 @@ class ContextNN(object):
         self.vectors_received += 1
 
         # filter active points
-        # bit_mask = np.array([1 if bit_idx in input_bits else 0
-        #                      for bit_idx in range(self.input_bit_count)], dtype=np.int8)
         intersections = np.sum(self.point_masks & input_bits, axis=1)
         active_point_indices = np.where(intersections > self.cluster_activate_threshold)[0]
-
         for idx in active_point_indices:
             if self.point_objects[idx].output_bit in output_bits:
-                self.point_objects[idx].process_input(input_bits)
+                self.point_objects[idx].process_input(input_bits, weight=+1)
+            elif self._state == const.STATE_CONSOLIDATE:
+                # suppress out-of-bit clusters
+                self.point_objects[idx].process_input(input_bits, weight=-1)
 
     def cluster_count(self) -> int:
         return sum(wp.cluster_count() for wp in self.point_objects)
@@ -107,7 +107,7 @@ class ContextNN(object):
     def detect_bits(self, input_bits: np.array):
         self.vectors_received += 1
         for point in self.point_objects:
-            point.process_input(input_bits)
+            point.process_input(input_bits, weight=+1)
 
     def summarize_detection(self) -> np.array:  # output bits
         result = [0] * self.output_bit_count
