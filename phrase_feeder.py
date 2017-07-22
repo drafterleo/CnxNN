@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 
 class PhraseFeeder:
@@ -13,6 +14,7 @@ class PhraseFeeder:
         self.bit_keys = list(phrase_base.keys())
         self.curr_key_idx = 0
         self.counters = dict()  # {bit_key: int}
+        self.random_indices = np.array([], dtype=int)
         for key in phrase_base.keys():
             self.counters[key] = 0
 
@@ -22,9 +24,12 @@ class PhraseFeeder:
         """
             return: phrases, bit_key
         """
-        key_idx = self.curr_key_idx
         if random_bit_key:
-            key_idx = random.randrange(len(self.bit_keys))
+            if self.random_indices.size == 0:
+                self.random_indices = np.arange(len(self.bit_keys), dtype=np.int)
+                np.random.shuffle(self.random_indices)
+            key_idx = self.random_indices[0]
+            self.random_indices = np.delete(self.random_indices, 0)
         else:
             key_idx = self.curr_key_idx
             self.curr_key_idx += 1

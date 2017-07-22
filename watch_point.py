@@ -18,12 +18,23 @@ class WatchPoint(object):
         self.cluster_make_threshold = cluster_make_threshold
         self.cluster_activate_threshold = cluster_activate_threshold
         self._state = const.STATE_ACCUMULATE
+        self.detections = 0
 
         # must have the synchronous indexation
         self.cluster_objects = []
         self.cluster_masks = np.empty(shape=(0, len(watch_bits)), dtype=np.uint8)
 
-    # @jit
+    @property
+    def state(self):
+        return self._state
+
+    @state.setter
+    def state(self, value):
+        if self._state != value:
+            self._state = value
+            if value == const.STATE_DETECT:
+                self.detections = 0
+
     def process_input(self, input_bits: np.array, weight: int):
         cluster_mask = input_bits[self.watch_bits]
         active_bit_count = np.sum(cluster_mask)
@@ -37,7 +48,10 @@ class WatchPoint(object):
 
             if len(clusterwise_isects) > 0:
                 active_cluster_indices = np.where(clusterwise_isects >= self.cluster_activate_threshold)[0]
-                self.update_clusters(cluster_mask, active_cluster_indices, weight)
+                if self._state == const.STATE_DETECT:
+                    self.detections += len(active_cluster_indices)
+                else:
+                    self.update_clusters(cluster_mask, active_cluster_indices, weight)
 
     def add_cluster(self, cluster_mask: np.array):
         new_cluster = Cluster(bit_mask=cluster_mask,

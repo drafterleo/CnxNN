@@ -41,7 +41,7 @@ class ContextNN(object):
         if self._state != value:
             self._state = value
             for point in self.point_objects:
-                point._state = value
+                point.state = value
 
     def gen_watch_points(self):
         self.watch_points.clear()
