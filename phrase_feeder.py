@@ -40,11 +40,11 @@ class PhraseFeeder:
         self.counters[curr_bit_key] += count
         curr_phrase_list = self.phrase_base[curr_bit_key]
         if curr_phrase_list:
-            if curr_counter >= len(curr_phrase_list):
-                curr_counter = 0
             if curr_counter + count < len(curr_phrase_list):
                 return curr_phrase_list[curr_counter:curr_counter + count], curr_bit_key
             else:
+                self.counters[curr_bit_key] = 0
+                print('counter ends')
                 return curr_phrase_list[curr_counter:], curr_bit_key
         else:
             return [], ()
